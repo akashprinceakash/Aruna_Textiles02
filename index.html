@@ -99,21 +99,47 @@ p{margin:0}
 .slide.on{opacity:1}
 .slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.08)}
 .slide.on img{transform:scale(1);transition:transform 7s linear}
-.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,11,8,.72) 0%,rgba(15,11,8,.15) 45%,rgba(15,11,8,.35) 100%);pointer-events:none}
-.hero-copy{position:absolute;z-index:2;left:0;right:0;bottom:clamp(56px,9vh,110px)}
-.hero-copy .kicker{color:#E8C98A;text-shadow:0 1px 14px rgba(0,0,0,.6)}
-.hero h1{font-size:clamp(44px,8vw,128px);line-height:.95;color:var(--cream);max-width:12ch}
+/* scrim: dark where the copy sits (left + bottom), clear where the room photo reads */
+.hero::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:
+  linear-gradient(90deg,rgba(15,11,8,.8) 0%,rgba(15,11,8,.5) 34%,rgba(15,11,8,.08) 64%,rgba(15,11,8,0) 100%),
+  linear-gradient(0deg,rgba(15,11,8,.72) 0%,rgba(15,11,8,0) 34%),
+  linear-gradient(180deg,rgba(15,11,8,.5) 0%,rgba(15,11,8,0) 20%)}
+.hero-copy{position:absolute;z-index:2;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding-top:110px;padding-bottom:clamp(18px,3vh,30px)}
+.hero-main{max-width:620px;margin-bottom:clamp(28px,6vh,64px)}
+.hero-copy .kicker{display:flex;align-items:center;gap:14px;color:#E8C98A;margin-bottom:clamp(14px,2.4vh,24px)}
+.hero-copy .kicker::before{content:'';width:34px;height:1px;background:currentColor;flex:none}
+.hero h1{font-size:clamp(46px,min(7vw,12.5vh),118px);line-height:.96;letter-spacing:-.025em;color:var(--cream)}
+.hero h1 .ln{display:block;overflow:hidden;padding-bottom:.06em}
+.hero h1 .ln > span{display:block}
 .hero h1 em{color:var(--brass)}
-.hero-row{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
-.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
-.hero-ctrl{display:flex;align-items:center;gap:18px;font-size:12px;letter-spacing:.2em}
-.hero-ctrl button{width:46px;height:46px;border-radius:50%;border:1px solid rgba(246,240,228,.5);background:transparent;color:var(--cream);transition:.3s}
-.hero-ctrl button:hover{background:var(--cream);color:var(--ink)}
-.hero-bar{width:120px;height:1px;background:rgba(246,240,228,.3);position:relative;overflow:hidden}
-.hero-bar i{position:absolute;inset:0;background:var(--cream);transform-origin:left;transform:scaleX(0)}
-.hero-bar i.run{animation:bar 6s linear forwards}
+.hero-lead{margin-top:clamp(16px,2.6vh,26px);max-width:42ch;font-size:clamp(15px,1.15vw,17px);line-height:1.65;color:rgba(246,240,228,.9)}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:clamp(22px,3.4vh,34px)}
+.hero-cta .btn{min-height:52px}
+.btn .play{width:0;height:0;border-left:7px solid currentColor;border-top:4.5px solid transparent;border-bottom:4.5px solid transparent}
+.hero-foot{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-top:18px;border-top:1px solid rgba(246,240,228,.2)}
+.hero-tag{display:flex;align-items:baseline;gap:12px;font-size:13px;color:rgba(246,240,228,.82)}
+.hero-tag b{font-family:'Fraunces',Georgia,serif;font-weight:400;font-style:italic;font-size:17px;color:var(--brass)}
+.hero-ctrl{display:flex;align-items:center;gap:16px;font-size:12px;letter-spacing:.2em}
+.hero-ctrl button.arw{width:46px;height:46px;border-radius:50%;border:1px solid rgba(246,240,228,.5);background:transparent;color:var(--cream);transition:.3s}
+.hero-ctrl button.arw:hover{background:var(--cream);color:var(--ink)}
+.hero-dots{display:flex;gap:6px}
+.hero-dots button{position:relative;width:34px;height:44px;background:none;border:0;padding:0}
+.hero-dots button::before,.hero-dots button i{content:'';position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;border-radius:2px}
+.hero-dots button::before{background:rgba(246,240,228,.28)}
+.hero-dots button i{background:var(--cream);transform:scaleX(0);transform-origin:left}
+.hero-dots button.done i{transform:scaleX(1)}
+.hero-dots button.on i{animation:bar 6s linear forwards}
+.hero.paused .hero-dots button.on i{animation:none;transform:scaleX(1)}
 @keyframes bar{to{transform:scaleX(1)}}
-.hero-cap{position:absolute;z-index:2;right:var(--gutter);top:110px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;writing-mode:vertical-rl;opacity:.75}
+/* entrance */
+.hero h1 .ln > span{animation:lineUp 1.2s var(--ease) both}
+.hero h1 .ln:nth-child(2) > span{animation-delay:.12s}
+.hero h1 .ln:nth-child(3) > span{animation-delay:.24s}
+.hero-copy .kicker,.hero-lead,.hero-cta,.hero-foot{animation:fadeUp 1s var(--ease) both}
+.hero-lead{animation-delay:.4s}.hero-cta{animation-delay:.52s}.hero-foot{animation-delay:.7s}
+@keyframes lineUp{from{transform:translateY(105%)}to{transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media(min-width:761px){.hero-foot{padding-right:64px}}
 
 /* ============ INTRO ============ */
 .intro{text-align:center;max-width:980px;margin-left:auto;margin-right:auto}
@@ -150,17 +176,42 @@ p{margin:0}
 .bento figure::after{content:'';position:absolute;inset:auto 0 0 0;height:40%;background:linear-gradient(0deg,rgba(15,11,8,.5),rgba(15,11,8,0));pointer-events:none}
 .bento figcaption{position:absolute;left:18px;bottom:16px;z-index:2;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cream);text-shadow:0 1px 12px rgba(0,0,0,.5)}
 
-/* ============ PROCESS STRIP ============ */
-.strip-wrap{position:relative}
-.strip{display:flex;gap:var(--gap);overflow-x:auto;scroll-snap-type:x mandatory;padding:0 var(--gutter);scroll-padding:0 var(--gutter);scrollbar-width:none;cursor:grab}
-.strip::-webkit-scrollbar{display:none}
-.strip.drag{cursor:grabbing;scroll-snap-type:none}
-.step{flex:0 0 clamp(250px,26vw,420px);scroll-snap-align:start;margin:0}
-.step .zoom{aspect-ratio:3/4}
-.step img{pointer-events:none;-webkit-user-drag:none}
-.step figcaption{display:flex;gap:14px;align-items:baseline;padding-top:16px}
-.step figcaption b{font-family:'Fraunces',Georgia,serif;font-weight:300;font-size:14px;color:var(--rust)}
-.step figcaption span{font-family:'Fraunces',Georgia,serif;font-size:clamp(20px,1.6vw,26px);font-weight:300}
+/* ============ HOW WE WORK — works wheel ============
+   Ported from the WorksWheel React component: at rest the six steps sit in a ring
+   around a title; turning blows the ring open into a vertical drum with the
+   current step flat at the front. Here the wheel is turned by scrolling the page. */
+.ww{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden;background:radial-gradient(ellipse at 50% 50%,var(--cream) 0%,var(--paper) 62%);user-select:none;-webkit-user-select:none}
+.ww-stage{position:absolute;inset:0;outline:none}
+.ww-stage:focus-visible{outline:2px solid var(--rust);outline-offset:-6px}
+.ww-wheel{position:absolute;left:50%;top:50%;transform-style:preserve-3d}
+.ww-card{position:absolute;-webkit-backface-visibility:hidden;backface-visibility:hidden;will-change:transform,opacity}
+.ww-face{position:relative;display:block;width:100%;height:100%;overflow:hidden;border-radius:8px;background:var(--sand);box-shadow:0 22px 44px -22px rgba(30,24,18,.45)}
+.ww-face img{width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
+.ww-face b{position:absolute;left:10px;top:10px;font-family:'Fraunces',Georgia,serif;font-weight:400;font-size:13px;line-height:1;padding:6px 9px;border-radius:20px;background:rgba(251,248,243,.88);color:var(--rust)}
+.ww-label{position:absolute;inset:0;display:grid;place-items:center;text-align:center;pointer-events:none;font-family:'Fraunces',Georgia,serif;font-weight:300;font-size:var(--ww-title,40px);line-height:1.05;letter-spacing:-.02em}
+.ww-title{position:absolute;left:6%;top:50%;transform:translateY(-50%);max-width:var(--ww-title-w,26%);pointer-events:none;opacity:0}
+.ww-title small{display:block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--rust);margin-bottom:12px}
+.ww-title span{display:block;font-family:'Fraunces',Georgia,serif;font-weight:300;font-size:var(--ww-title,40px);line-height:1.05;letter-spacing:-.02em}
+.ww-index{position:absolute;top:clamp(84px,11vh,120px);right:var(--gutter);margin:0;padding:0;list-style:none;text-align:right}
+.ww-index button{display:flex;justify-content:flex-end;align-items:baseline;gap:10px;width:100%;min-height:34px;background:none;border:0;padding:4px 0;font-size:13.5px;color:var(--ink-soft);transition:color .3s}
+.ww-index button small{font-size:10.5px;letter-spacing:.14em;color:var(--brass)}
+.ww-index button:hover,.ww-index button[aria-current="true"]{color:var(--ink)}
+.ww-index button[aria-current="true"]{font-weight:500}
+.ww-index button[aria-current="true"] small{color:var(--rust)}
+.ww-ctrl{position:absolute;left:var(--gutter);right:var(--gutter);bottom:clamp(18px,4vh,36px);display:flex;justify-content:space-between;align-items:center;gap:16px}
+.ww-hint{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft)}
+.ww-btns{display:flex;align-items:center;gap:14px;font-size:12px;letter-spacing:.2em;white-space:nowrap}
+.ww-btns button{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:var(--white);transition:.3s}
+.ww-btns button:hover{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.ww-btns button:disabled{opacity:.35;pointer-events:none}
+@media(min-width:761px){.ww-index{right:calc(var(--gutter) + 64px)}.ww-ctrl{right:calc(var(--gutter) + 64px)}}
+@media(max-width:760px){
+  .ww-index{display:none}
+  .ww-title{left:var(--gutter);right:var(--gutter);max-width:none;top:calc(50% + var(--ww-cardh,200px)/2 + 22px);transform:none;text-align:center}
+  .ww-title small{margin-bottom:8px}
+  .ww-hint{font-size:10px;letter-spacing:.18em;max-width:16ch}
+  .ww-ctrl{bottom:calc(84px + env(safe-area-inset-bottom))}
+}
 .arrows{display:flex;gap:10px}
 .arrows button{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:var(--white);transition:.3s}
 .arrows button:hover{background:var(--ink);color:var(--cream);border-color:var(--ink)}
@@ -338,22 +389,26 @@ footer{background:var(--charcoal);color:rgba(246,240,228,.7);padding:clamp(48px,
 .on-dark .kicker{color:var(--brass)}
 .on-dark h2,.on-dark h3,.on-dark h4{color:var(--cream)}
 .on-dark em{color:var(--brass)}
-.hero h1{max-width:none}
-.hero h1 span{display:block}
-.hero-lead{margin-top:20px;max-width:44ch;font-size:clamp(15px,1.2vw,17px);color:rgba(246,240,228,.92)}
-.tagcard{display:inline-flex;align-items:center;gap:12px;margin-top:22px;padding:10px 18px;border:1px solid rgba(246,240,228,.3);border-radius:30px;background:rgba(15,11,8,.35);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);font-size:12px}
-.tagcard b{font-family:'Fraunces',Georgia,serif;font-weight:400;color:var(--brass);font-size:14px}
-
-/* history rail */
-.rail{overflow:hidden;margin-top:clamp(40px,5vw,72px)}
-.rail .kicker{margin-bottom:20px}
-.rail-track{display:flex;gap:var(--gap);width:max-content;animation:mq 60s linear infinite}
-.rail:hover .rail-track{animation-play-state:paused}
-.hist{flex:0 0 clamp(250px,22vw,330px);margin:0}
+/* history slider — swipe on touch, drag or arrows on desktop */
+.history .head{margin-bottom:clamp(22px,2.6vw,38px)}
+.hist-nav{display:flex;align-items:center;gap:14px;font-size:12px;letter-spacing:.2em;color:var(--ink-soft)}
+.hist-nav button{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:var(--white);transition:.3s}
+.hist-nav button:hover{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.hist-nav button:disabled{opacity:.35;pointer-events:none}
+.hist-track{display:flex;gap:clamp(12px,1.4vw,22px);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;padding:4px var(--gutter) 6px;scroll-padding:0 var(--gutter);scrollbar-width:none;cursor:grab;-webkit-overflow-scrolling:touch}
+.hist-track::-webkit-scrollbar{display:none}
+.hist-track:focus-visible{outline:2px solid var(--rust);outline-offset:-2px}
+.hist-track.drag{cursor:grabbing;scroll-snap-type:none}
+.hist-track.drag a,.hist-track.drag img{pointer-events:none}
+.hist{flex:0 0 clamp(270px,27vw,400px);margin:0;scroll-snap-align:start}
 .hist .zoom{aspect-ratio:4/5}
-.hist figcaption{padding-top:14px}
-.hist h4{font-size:20px;font-weight:400}
-.hist p{font-size:13.5px;line-height:1.55;color:var(--ink-soft);margin-top:6px}
+.hist img{pointer-events:none;-webkit-user-drag:none}
+.hist .n{position:absolute;z-index:2;left:14px;top:14px;font-family:'Fraunces',Georgia,serif;font-size:13px;line-height:1;padding:7px 10px;border-radius:20px;background:rgba(251,248,243,.9);color:var(--rust)}
+.hist figcaption{padding-top:16px}
+.hist h4{font-size:clamp(20px,1.6vw,24px);font-weight:400}
+.hist p{font-size:14px;line-height:1.6;color:var(--ink-soft);margin-top:8px;max-width:40ch}
+.hist-progress{position:relative;height:2px;background:var(--line);margin-top:clamp(22px,2.4vw,34px);border-radius:2px;overflow:hidden}
+.hist-progress i{position:absolute;left:0;top:0;bottom:0;width:20%;background:var(--rust);border-radius:2px;transition:transform .25s linear}
 
 /* about */
 .about{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(28px,5vw,88px);align-items:center}
@@ -467,10 +522,110 @@ footer{background:var(--charcoal);color:rgba(246,240,228,.7);padding:clamp(48px,
   .bento .quote{grid-column:1/-1;aspect-ratio:auto}
 }
 @media(max-width:760px){
-  .hero::after{background:linear-gradient(0deg,rgba(15,11,8,.88) 0%,rgba(15,11,8,.55) 50%,rgba(15,11,8,.35) 100%)}
   .contact::after{background:linear-gradient(0deg,rgba(15,11,8,.92) 0%,rgba(15,11,8,.7) 60%,rgba(15,11,8,.45) 100%)}
   .contact .wrap{padding-top:120px}
   .find{max-width:none}
+}
+
+/* ============ MOBILE-FIRST PASS ============
+   Phones get their own layout rather than a squeezed desktop: thumb-reach
+   actions in a bottom dock, swipe rails with snap, 44px+ touch targets. */
+.dock{display:none}
+.k-long{display:inline}
+@media(max-width:760px){
+  :root{--sec:clamp(64px,17vw,96px);--gutter:20px}
+  body{font-size:15.5px}
+  .kicker{font-size:10.5px;letter-spacing:.2em;margin-bottom:14px}
+  .h-lg{font-size:clamp(30px,8.6vw,40px);line-height:1.1}
+  .h-xl{font-size:clamp(34px,10vw,46px)}
+  .lead{font-size:15.5px;line-height:1.7}
+  .btn{min-height:52px;justify-content:center;padding:15px 24px}
+
+  /* nav: compact bar, real 44px menu target */
+  .nav-inner{height:64px}
+  .nav.solid .nav-inner{height:58px}
+  .brand b{font-size:17px;letter-spacing:.14em}
+  .brand small{font-size:8px}
+  .nav-shop{display:none}
+  .burger{width:44px;height:44px;margin-right:-10px}
+  .burger span{left:10px;right:10px}
+  .burger span:nth-child(1){top:15px}.burger span:nth-child(2){top:21.5px}.burger span:nth-child(3){top:28px}
+  .mmenu{justify-content:flex-start;padding:96px 24px calc(32px + env(safe-area-inset-bottom));gap:0}
+  .mmenu a{display:flex;align-items:center;min-height:58px;font-size:30px;border-bottom:1px solid rgba(246,240,228,.12)}
+  .mmenu .x{top:10px;right:12px;width:48px;height:48px}
+
+  /* hero: copy anchored to the thumb zone, photo visible above it */
+  .hero{min-height:600px}
+  .hero::after{background:linear-gradient(0deg,rgba(15,11,8,.95) 0%,rgba(15,11,8,.82) 42%,rgba(15,11,8,.45) 62%,rgba(15,11,8,.12) 80%,rgba(15,11,8,.4) 100%)}
+  .hero-copy{padding-top:84px;padding-bottom:calc(14px + env(safe-area-inset-bottom))}
+  .hero-main{margin-bottom:22px}
+  .k-long{display:none}
+  .hero-copy .kicker{font-size:10.5px;letter-spacing:.22em;gap:10px;margin-bottom:14px}
+  .hero-copy .kicker::before{width:22px}
+  .hero h1{font-size:clamp(44px,13.4vw,60px);line-height:.98}
+  .hero-lead{font-size:15px;line-height:1.6;margin-top:16px}
+  .hero-cta{display:grid;grid-template-columns:1fr;gap:4px;margin-top:22px}
+  .hero-cta .btn{width:100%}
+  .hero-cta .btn.ghost{border:0;min-height:46px;background:none;justify-content:center}
+  .hero-foot{padding-top:12px}
+  .hero-tag{display:none}
+  .hero-ctrl{width:100%;justify-content:space-between;gap:8px}
+  .hero-ctrl #hNum{display:none}
+  .hero-dots{flex:1;gap:4px}
+  .hero-dots button{flex:1;width:auto}
+  .hero-ctrl button.arw{width:44px;height:44px}
+
+  /* history: one card + a peek of the next */
+  .history .head{align-items:flex-end;flex-wrap:nowrap}
+  .hist-nav span{display:none}
+  .hist-nav button{width:44px;height:44px}
+  .hist{flex-basis:78vw}
+
+  /* rails that already swipe: show the next card so it reads as swipeable */
+  .reel{flex-basis:70%}
+  .values{grid-template-columns:1fr 1fr;gap:10px}
+  .value{aspect-ratio:3/4}
+  .value div{left:12px;right:12px;bottom:12px}
+  .value h4{font-size:17px}
+  .value p{font-size:12px;line-height:1.4}
+  .tiles .tile:nth-child(1){aspect-ratio:4/3.2}
+  .vm-card{min-height:440px}
+  .banner{height:clamp(360px,64svh,560px)}
+  .banner h3{font-size:clamp(24px,7vw,32px);padding:0 4px}
+  .team{min-height:78svh}
+  .team h2{font-size:clamp(32px,9vw,42px)}
+  .heritage{gap:24px}
+  .commit-list li{font-size:14.5px;padding:16px 0}
+  .masonry{column-gap:8px}
+  .masonry button{margin-bottom:8px}
+  .contact h2{font-size:clamp(38px,11vw,52px)}
+  .contact-cta .btn{width:100%}
+  .find .socials a{width:44px;height:44px}
+  .socials a{width:44px;height:44px}
+  .foot a{padding:6px 0}
+  footer{padding-bottom:calc(96px + env(safe-area-inset-bottom))}
+
+  /* bottom dock replaces the floating social stack */
+  .float{display:none}
+  .dock{display:grid;grid-template-columns:1fr 1fr 52px;gap:8px;position:fixed;z-index:95;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));padding:6px;border-radius:999px;background:rgba(21,17,12,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 18px 40px -18px rgba(0,0,0,.6);transform:translateY(160%);transition:transform .5s var(--ease)}
+  .dock.show{transform:none}
+  .dock a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;border-radius:999px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--cream)}
+  .dock .d-shop{background:var(--cream);color:var(--ink)}
+  .dock .d-wa{background:#2E7D4F;color:#fff}
+  .dock .d-up{border:1px solid rgba(246,240,228,.25)}
+  .dock .si{width:18px;height:18px}
+  .mmenu.open ~ .dock,.lb.on ~ .dock{transform:translateY(160%)}
+
+  /* lightbox: full-bleed with thumb-reach controls */
+  .lb img{max-width:100vw;max-height:78svh}
+  .lb .pv,.lb .nx{top:auto;bottom:calc(16px + env(safe-area-inset-bottom));transform:none;width:52px;height:52px}
+}
+@media(max-width:380px){
+  .hero h1{font-size:42px}
+  .hero-lead{font-size:14.5px}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero h1 .ln > span,.hero-copy .kicker,.hero-lead,.hero-cta,.hero-foot{animation:none}
 }
 </style>
 </head>
@@ -508,7 +663,7 @@ footer{background:var(--charcoal);color:rgba(246,240,228,.7);padding:clamp(48px,
 <header class="hero" id="home">
   <!-- <div class="slide on"><img src="assets/hq/living-2000.webp" srcset="assets/hq/living-1000.webp 1000w, assets/hq/living-2000.webp 1733w" sizes="100vw" alt="Aruna geometric hand-tufted rug styled in a living room"></div> -->
   <!-- placeholder room shot (Unsplash, free licence) — replace with Aruna rug in a room -->
-  <div class="slide"><img src="https://images.unsplash.com/photo-1534889156217-d643df14f14a?auto=format&fit=crop&q=80&w=2400" srcset="https://images.unsplash.com/photo-1534889156217-d643df14f14a?auto=format&fit=crop&q=80&w=1200 1200w, https://images.unsplash.com/photo-1534889156217-d643df14f14a?auto=format&fit=crop&q=80&w=2400 2400w" sizes="100vw" alt="Teal sofa on a red area rug in a living room" loading="lazy" referrerpolicy="no-referrer"></div>
+  <div class="slide on"><img src="https://images.unsplash.com/photo-1534889156217-d643df14f14a?auto=format&fit=crop&q=80&w=2400" srcset="https://images.unsplash.com/photo-1534889156217-d643df14f14a?auto=format&fit=crop&q=80&w=1200 1200w, https://images.unsplash.com/photo-1534889156217-d643df14f14a?auto=format&fit=crop&q=80&w=2400 2400w" sizes="100vw" alt="Teal sofa on a red area rug in a living room" fetchpriority="high" referrerpolicy="no-referrer"></div>
   <!-- placeholder room shot (Unsplash, free licence) — replace with Aruna rug in a room -->
   <div class="slide"><img src="https://images.unsplash.com/photo-1598928545925-1b288f3e5d3e?auto=format&fit=crop&q=80&w=2400" srcset="https://images.unsplash.com/photo-1598928545925-1b288f3e5d3e?auto=format&fit=crop&q=80&w=1200 1200w, https://images.unsplash.com/photo-1598928545925-1b288f3e5d3e?auto=format&fit=crop&q=80&w=2400 2400w" sizes="100vw" alt="Living room with an ivory and brown area rug and leather armchair" loading="lazy" referrerpolicy="no-referrer"></div>
   <!-- placeholder room shot (Unsplash, free licence) — replace with Aruna rug in a room -->
@@ -518,22 +673,22 @@ footer{background:var(--charcoal);color:rgba(246,240,228,.7);padding:clamp(48px,
   <!-- placeholder room shot (Unsplash, free licence) — replace with Aruna rug in a room -->
   <div class="slide"><img src="https://images.unsplash.com/photo-1572123979839-3749e9973aba?auto=format&fit=crop&q=80&w=2400" srcset="https://images.unsplash.com/photo-1572123979839-3749e9973aba?auto=format&fit=crop&q=80&w=1200 1200w, https://images.unsplash.com/photo-1572123979839-3749e9973aba?auto=format&fit=crop&q=80&w=2400 2400w" sizes="100vw" alt="Large multi-coloured rug styled in a room" loading="lazy" referrerpolicy="no-referrer"></div>
   <div class="hero-copy wrap">
-    <span class="kicker">CRAFTING EXCEPTIONAL HANDMADE RUGS &amp; CARPETS</span>
-    <div class="hero-row">
-      <div>
-        <h1><span>Weave a</span><span><em>brighter</em></span><span>tomorrow</span></h1>
-        <p class="hero-lead">From two broadlooms to a complete in-house workshop today &mdash; every carpet is still shaped, tufted and finished entirely by hand.</p>
-        <div class="hero-cta">
-          <a href="#products" class="btn light">Explore Collections</a>
-          <a href="#craft" class="btn ghost">&#9656;&nbsp; See the Craft</a>
-        </div>
-        <div class="tagcard"><b>Hand Made</b><span>Artisans shaping every article by hand</span></div>
+    <div class="hero-main">
+      <span class="kicker"><span><span class="k-long">Crafting exceptional </span>handmade rugs &amp; carpets</span></span>
+      <h1><span class="ln"><span>Weave a</span></span><span class="ln"><span><em>brighter</em></span></span><span class="ln"><span>tomorrow</span></span></h1>
+      <p class="hero-lead">From two broadlooms to a complete in-house workshop today &mdash; every carpet is still shaped, tufted and finished entirely by hand.</p>
+      <div class="hero-cta">
+        <a href="#products" class="btn light">Explore Collections</a>
+        <a href="#craft" class="btn ghost"><span class="play" aria-hidden="true"></span>See the Craft</a>
       </div>
+    </div>
+    <div class="hero-foot">
+      <p class="hero-tag"><b>Hand Made</b><span>Artisans shaping every article by hand</span></p>
       <div class="hero-ctrl">
-        <button id="hPrev" aria-label="Previous slide">&#8592;</button>
-        <span id="hNum">01 / 06</span>
-        <span class="hero-bar"><i id="hBar"></i></span>
-        <button id="hNext" aria-label="Next slide">&#8594;</button>
+        <button class="arw" id="hPrev" aria-label="Previous slide">&#8592;</button>
+        <span id="hNum" aria-live="polite">01 / 05</span>
+        <div class="hero-dots" id="hDots" role="group" aria-label="Choose slide"></div>
+        <button class="arw" id="hNext" aria-label="Next slide">&#8594;</button>
       </div>
     </div>
   </div>
@@ -541,10 +696,20 @@ footer{background:var(--charcoal);color:rgba(246,240,228,.7);padding:clamp(48px,
 
 <main>
 
-<!-- ============ HISTORY RAIL ============ -->
-<section class="rail" aria-label="The history behind each article">
-  <div class="wrap"><span class="kicker">THE HISTORY BEHIND EACH ARTICLE</span></div>
-  <div class="rail-track"><figure class="hist"><div class="zoom"><img src="assets/hq/floral-blush-1000.webp" alt="" loading="lazy" draggable="false"></div><figcaption><h4>Handtufted Articles</h4><p>Rose to popularity in the 20th century as a faster alternative to hand-knotting.</p></figcaption></figure><figure class="hist"><div class="zoom"><img src="assets/hq/jacquard-1000.webp" alt="" loading="lazy" draggable="false"></div><figcaption><h4>Jacquard Articles</h4><p>Named after Joseph Marie Jacquard&#8217;s 1804 punch-card loom, which made intricate woven patterns repeatable.</p></figcaption></figure><figure class="hist"><div class="zoom"><img src="assets/hq/runner-1000.webp" alt="" loading="lazy" draggable="false"></div><figcaption><h4>Broadloom Articles</h4><p>Takes its name from the wide looms built to weave seamless, wall-to-wall carpet.</p></figcaption></figure><figure class="hist"><div class="zoom"><img src="assets/hq/braided-cord-1000.webp" alt="" loading="lazy" draggable="false"></div><figcaption><h4>Braided Articles</h4><p>Descends from early American folk craft &mdash; fabric strips braided and coiled into hardwearing mats.</p></figcaption></figure><figure class="hist"><div class="zoom"><img src="assets/hq/pitloom-1000.webp" alt="" loading="lazy" draggable="false"></div><figcaption><h4>Pitloom Articles</h4><p>Woven on a loom set into a pit and worked with the feet &mdash; a tradition centuries old in South Asia.</p></figcaption></figure><figure class="hist" aria-hidden="true"><div class="zoom"><img src="assets/hq/floral-blush-1000.webp" alt="" loading="lazy" draggable="false"></div><figcaption><h4>Handtufted Articles</h4><p>Rose to popularity in the 20th century as a faster alternative to hand-knotting.</p></figcaption></figure><figure class="hist" aria-hidden="true"><div class="zoom"><img src="assets/hq/jacquard-1000.webp" alt="" loading="lazy" draggable="false"></div><figcaption><h4>Jacquard Articles</h4><p>Named after Joseph Marie Jacquard&#8217;s 1804 punch-card loom, which made intricate woven patterns repeatable.</p></figcaption></figure><figure class="hist" aria-hidden="true"><div class="zoom"><img src="assets/hq/runner-1000.webp" alt="" loading="lazy" draggable="false"></div><figcaption><h4>Broadloom Articles</h4><p>Takes its name from the wide looms built to weave seamless, wall-to-wall carpet.</p></figcaption></figure><figure class="hist" aria-hidden="true"><div class="zoom"><img src="assets/hq/braided-cord-1000.webp" alt="" loading="lazy" draggable="false"></div><figcaption><h4>Braided Articles</h4><p>Descends from early American folk craft &mdash; fabric strips braided and coiled into hardwearing mats.</p></figcaption></figure><figure class="hist" aria-hidden="true"><div class="zoom"><img src="assets/hq/pitloom-1000.webp" alt="" loading="lazy" draggable="false"></div><figcaption><h4>Pitloom Articles</h4><p>Woven on a loom set into a pit and worked with the feet &mdash; a tradition centuries old in South Asia.</p></figcaption></figure></div>
+<!-- ============ HISTORY — swipeable slider ============ -->
+<section class="sec history" aria-labelledby="histTitle">
+  <div class="wrap head">
+    <div><span class="kicker">THE HISTORY BEHIND EACH ARTICLE</span><h2 class="h-lg" id="histTitle">Where each weave <em>comes from</em></h2></div>
+    <div class="hist-nav"><button id="hiPrev" aria-label="Previous article" aria-controls="histTrack">&#8592;</button><span id="hiNum">01 / 05</span><button id="hiNext" aria-label="Next article" aria-controls="histTrack">&#8594;</button></div>
+  </div>
+  <div class="hist-track" id="histTrack" tabindex="0" role="region" aria-label="History of each technique &mdash; swipe, drag or use the arrow buttons">
+    <figure class="hist"><div class="zoom"><span class="n">01</span><img src="assets/hq/floral-blush-1000.webp" alt="Hand-tufted floral rug in blush tones" loading="lazy" draggable="false"></div><figcaption><h4>Handtufted Articles</h4><p>Rose to popularity in the 20th century as a faster alternative to hand-knotting.</p></figcaption></figure>
+    <figure class="hist"><div class="zoom"><span class="n">02</span><img src="assets/hq/jacquard-1000.webp" alt="Jacquard-woven rug" loading="lazy" draggable="false"></div><figcaption><h4>Jacquard Articles</h4><p>Named after Joseph Marie Jacquard&#8217;s 1804 punch-card loom, which made intricate woven patterns repeatable.</p></figcaption></figure>
+    <figure class="hist"><div class="zoom"><span class="n">03</span><img src="assets/hq/runner-1000.webp" alt="Broadloom runner stretched for finishing" loading="lazy" draggable="false"></div><figcaption><h4>Broadloom Articles</h4><p>Takes its name from the wide looms built to weave seamless, wall-to-wall carpet.</p></figcaption></figure>
+    <figure class="hist"><div class="zoom"><span class="n">04</span><img src="assets/hq/braided-cord-1000.webp" alt="Braided cord being coiled into a rug" loading="lazy" draggable="false"></div><figcaption><h4>Braided Articles</h4><p>Descends from early American folk craft &mdash; fabric strips braided and coiled into hardwearing mats.</p></figcaption></figure>
+    <figure class="hist"><div class="zoom"><span class="n">05</span><img src="assets/hq/pitloom-1000.webp" alt="Weaver at a traditional pit loom" loading="lazy" draggable="false"></div><figcaption><h4>Pitloom Articles</h4><p>Woven on a loom set into a pit and worked with the feet &mdash; a tradition centuries old in South Asia.</p></figcaption></figure>
+  </div>
+  <div class="wrap"><div class="hist-progress" aria-hidden="true"><i id="hiBar"></i></div></div>
 </section>
 
 <!-- ============ ABOUT ============ -->
@@ -627,18 +792,33 @@ footer{background:var(--charcoal);color:rgba(246,240,228,.7);padding:clamp(48px,
       <div><span class="kicker">HOW WE WORK</span><h2 class="h-lg">From raw yarn to finished carpet &mdash; <em>by hand</em></h2></div>
       <div>
         <p class="lead">Every Aruna Textile rug passes through the same human hands from start to finish. No two journeys look identical, but the steps stay the same.</p>
-        <div class="arrows" style="margin-top:20px"><button id="sPrev" aria-label="Previous">&#8592;</button><button id="sNext" aria-label="Next">&#8594;</button></div>
       </div>
     </div>
   </div>
-  <div class="strip-wrap">
-    <div class="strip" id="strip">
-      <figure class="step"><div class="zoom"><img src="assets/hq/yarn-1000.webp" alt="Bundles of dyed yarn" loading="lazy"></div><figcaption><b>01</b><span>The Material</span></figcaption></figure>
-      <figure class="step"><div class="zoom"><img src="assets/hq/warp-threads-1000.webp" alt="Setting the warp threads" loading="lazy"></div><figcaption><b>02</b><span>The Warp</span></figcaption></figure>
-      <figure class="step"><div class="zoom"><img src="assets/hq/tufting-1000.webp" alt="Artisan hand-tufting a design" loading="lazy"></div><figcaption><b>03</b><span>The Artisan&#8217;s Hand</span></figcaption></figure>
-      <figure class="step"><div class="zoom"><img src="assets/hq/weaver-1000.webp" alt="Weaver at the loom" loading="lazy"></div><figcaption><b>04</b><span>The Weave</span></figcaption></figure>
-      <figure class="step"><div class="zoom"><img src="assets/hq/trim-red-1000.webp" alt="Trimming a rug by hand" loading="lazy"></div><figcaption><b>05</b><span>The Finish</span></figcaption></figure>
-      <figure class="step"><div class="zoom"><img src="assets/hq/sunburst-top-1000.webp" alt="A finished round sunburst rug" loading="lazy"></div><figcaption><b>06</b><span>The Finished Piece</span></figcaption></figure>
+  <div class="ww" id="worksWheel">
+    <div class="ww-stage" tabindex="0" role="listbox" aria-label="How we work &mdash; six steps. Use the arrow keys to turn the wheel." aria-activedescendant="ww-0">
+      <div class="ww-wheel">
+        <div class="ww-card" id="ww-0" role="option" aria-selected="true" data-title="The Material" aria-label="Step 01: The Material"><span class="ww-face"><img src="assets/hq/yarn-1000.webp" alt="Bundles of dyed yarn" loading="lazy" draggable="false"><b>01</b></span></div>
+        <div class="ww-card" id="ww-1" role="option" aria-selected="false" data-title="The Warp" aria-label="Step 02: The Warp"><span class="ww-face"><img src="assets/hq/warp-threads-1000.webp" alt="Setting the warp threads" loading="lazy" draggable="false"><b>02</b></span></div>
+        <div class="ww-card" id="ww-2" role="option" aria-selected="false" data-title="The Artisan&#8217;s Hand" aria-label="Step 03: The Artisan&#8217;s Hand"><span class="ww-face"><img src="assets/hq/tufting-1000.webp" alt="Artisan hand-tufting a design" loading="lazy" draggable="false"><b>03</b></span></div>
+        <div class="ww-card" id="ww-3" role="option" aria-selected="false" data-title="The Weave" aria-label="Step 04: The Weave"><span class="ww-face"><img src="assets/hq/weaver-1000.webp" alt="Weaver at the loom" loading="lazy" draggable="false"><b>04</b></span></div>
+        <div class="ww-card" id="ww-4" role="option" aria-selected="false" data-title="The Finish" aria-label="Step 05: The Finish"><span class="ww-face"><img src="assets/hq/trim-red-1000.webp" alt="Trimming a rug by hand" loading="lazy" draggable="false"><b>05</b></span></div>
+        <div class="ww-card" id="ww-5" role="option" aria-selected="false" data-title="The Finished Piece" aria-label="Step 06: The Finished Piece"><span class="ww-face"><img src="assets/hq/sunburst-top-1000.webp" alt="A finished round sunburst rug" loading="lazy" draggable="false"><b>06</b></span></div>
+      </div>
+    </div>
+    <div class="ww-label" aria-hidden="true"><span>Six steps,<br><em>one pair of hands</em></span></div>
+    <div class="ww-title" aria-live="polite"><small>Step 01</small><span>The Material</span></div>
+    <ol class="ww-index" aria-label="Steps">
+      <li><button type="button" data-i="0"><small>01</small>The Material</button></li>
+      <li><button type="button" data-i="1"><small>02</small>The Warp</button></li>
+      <li><button type="button" data-i="2"><small>03</small>The Artisan&#8217;s Hand</button></li>
+      <li><button type="button" data-i="3"><small>04</small>The Weave</button></li>
+      <li><button type="button" data-i="4"><small>05</small>The Finish</button></li>
+      <li><button type="button" data-i="5"><small>06</small>The Finished Piece</button></li>
+    </ol>
+    <div class="ww-ctrl">
+      <span class="ww-hint" aria-hidden="true">Scroll to turn the wheel</span>
+      <div class="ww-btns"><button type="button" class="ww-prev" aria-label="Previous step">&#8592;</button><span class="ww-count">00 / 06</span><button type="button" class="ww-next" aria-label="Next step">&#8594;</button></div>
     </div>
   </div>
 </section>
@@ -837,6 +1017,13 @@ footer{background:var(--charcoal);color:rgba(246,240,228,.7);padding:clamp(48px,
   <a href="#" aria-label="Email us"><svg class="si" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></a>
 </div>
 
+<!-- Mobile quick-actions dock (phones only) — replace the WhatsApp href with wa.me/<number> -->
+<nav class="dock" id="dock" aria-label="Quick actions">
+  <a class="d-shop" href="https://radiant-khapse-0df5b6.netlify.app/">Shop</a>
+  <a class="d-wa" href="#" aria-label="Chat on WhatsApp"><svg class="si" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.260-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35m-5.42 7.4h-.01a9.870 9.870 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88a9.82 9.82 0 0 1 6.99 2.9 9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89a11.82 11.82 0 0 0-3.48-8.41Z"/></svg>WhatsApp</a>
+  <a class="d-up" href="#home" aria-label="Back to top">&#8593;</a>
+</nav>
+
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer">
   <button class="x" id="lbX" aria-label="Close">&#10005;</button>
   <button class="pv" id="lbP" aria-label="Previous">&#8592;</button>
@@ -850,33 +1037,66 @@ footer{background:var(--charcoal);color:rgba(246,240,228,.7);padding:clamp(48px,
 (function(){
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* nav */
-  const nav = document.getElementById('nav');
-  const navSync = () => nav.classList.toggle('solid', scrollY > 60);
+  /* nav + mobile dock */
+  const nav = document.getElementById('nav'), dock = document.getElementById('dock'), heroEl = document.getElementById('home');
+  const navSync = () => {
+    nav.classList.toggle('solid', scrollY > 60);
+    dock.classList.toggle('show', scrollY > heroEl.offsetHeight * .7);
+  };
   addEventListener('scroll', navSync, {passive:true}); navSync();
-  const mm = document.getElementById('mmenu');
-  document.getElementById('burger').onclick = () => mm.classList.add('open');
-  document.getElementById('mclose').onclick = () => mm.classList.remove('open');
-  mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mm.classList.remove('open')));
+  const mm = document.getElementById('mmenu'), burger = document.getElementById('burger'), mclose = document.getElementById('mclose');
+  burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-controls', 'mmenu');
+  function setMenu(open){
+    mm.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+    if(open) setTimeout(() => mclose.focus(), 300); else burger.focus({preventScroll:true});
+  }
+  burger.onclick = () => setMenu(true);
+  mclose.onclick = () => setMenu(false);
+  mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { mm.classList.remove('open'); burger.setAttribute('aria-expanded','false'); document.body.style.overflow = ''; }));
+  addEventListener('keydown', e => { if(e.key === 'Escape' && mm.classList.contains('open')) setMenu(false); });
 
-  /* hero crossfade */
-  document.querySelectorAll('.hero .slide img').forEach(im => im.addEventListener('error', () => { const sl = im.closest('.slide'); if(sl && !sl.classList.contains('on')) sl.remove(); }));
-  let slides = () => [...document.querySelectorAll('.hero .slide')];
-  const num = document.getElementById('hNum'), bar = document.getElementById('hBar');
+  /* hero crossfade — tap a segment, use the arrows, or swipe on touch */
+  document.querySelectorAll('.hero .slide img').forEach(im => im.addEventListener('error', () => { const sl = im.closest('.slide'); if(sl && !sl.classList.contains('on')){ sl.remove(); buildDots(); show(i); } }));
+  const slides = () => [...document.querySelectorAll('.hero .slide')];
+  const num = document.getElementById('hNum'), dots = document.getElementById('hDots');
   let i = 0, timer;
+  function buildDots(){
+    dots.innerHTML = '';
+    slides().forEach((_, n) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.setAttribute('aria-label', 'Show slide ' + (n+1)); b.innerHTML = '<i></i>';
+      b.onclick = () => show(n);
+      dots.appendChild(b);
+    });
+  }
   function show(n){
-    const S = slides();
+    const S = slides(); if(!S.length) return;
     S.forEach(x => x.classList.remove('on'));
     i = (n + S.length) % S.length;
     S[i].classList.add('on');
-    if(S[i+1]){ const nx = S[i+1].querySelector('img'); if(nx) nx.loading = 'eager'; }
+    const nx = S[(i+1) % S.length].querySelector('img'); if(nx) nx.loading = 'eager';
     num.textContent = String(i+1).padStart(2,'0') + ' / ' + String(S.length).padStart(2,'0');
-    bar.classList.remove('run'); void bar.offsetWidth; if(!reduce) bar.classList.add('run');
+    [...dots.children].forEach((d, k) => {
+      d.classList.remove('on'); d.classList.toggle('done', k < i);
+      d.setAttribute('aria-current', k === i ? 'true' : 'false');
+    });
+    const cur = dots.children[i]; if(cur){ void cur.offsetWidth; cur.classList.add('on'); }
     clearTimeout(timer); if(!reduce) timer = setTimeout(() => show(i+1), 6000);
   }
+  if(reduce) heroEl.classList.add('paused');
   document.getElementById('hNext').onclick = () => show(i+1);
   document.getElementById('hPrev').onclick = () => show(i-1);
-  show(0);
+  let tx = null, ty = 0;
+  heroEl.addEventListener('touchstart', e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, {passive:true});
+  heroEl.addEventListener('touchend', e => {
+    if(tx === null) return;
+    const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty; tx = null;
+    if(Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4) show(dx < 0 ? i+1 : i-1);
+  }, {passive:true});
+  document.addEventListener('visibilitychange', () => { if(document.hidden) clearTimeout(timer); else show(i); });
+  buildDots(); show(0);
 
   /* reveals */
   const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), {rootMargin:'0px 0px -8% 0px'});
@@ -893,15 +1113,43 @@ footer{background:var(--charcoal);color:rgba(246,240,228,.7);padding:clamp(48px,
   }), {threshold:.6});
   document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
 
-  /* process strip: arrows + drag */
-  const strip = document.getElementById('strip');
-  const stepW = () => strip.querySelector('.step').offsetWidth + 14;
-  document.getElementById('sNext').onclick = () => strip.scrollBy({left: stepW(), behavior:'smooth'});
-  document.getElementById('sPrev').onclick = () => strip.scrollBy({left: -stepW(), behavior:'smooth'});
-  let down = false, sx = 0, sl = 0;
-  strip.addEventListener('pointerdown', e => { if(e.pointerType !== 'mouse') return; down = true; sx = e.clientX; sl = strip.scrollLeft; strip.classList.add('drag'); });
-  addEventListener('pointermove', e => { if(down) strip.scrollLeft = sl - (e.clientX - sx); });
-  addEventListener('pointerup', () => { if(down){ down = false; strip.classList.remove('drag'); } });
+  /* history slider: native swipe + snap on touch, drag and arrows on desktop */
+  const ht = document.getElementById('histTrack'), hiP = document.getElementById('hiPrev'), hiN = document.getElementById('hiNext'), hiNum = document.getElementById('hiNum'), hiBar = document.getElementById('hiBar');
+  const cards = [...ht.querySelectorAll('.hist')];
+  const cardStep = () => cards[1] ? cards[1].offsetLeft - cards[0].offsetLeft : ht.clientWidth;
+  function histSync(){
+    const max = ht.scrollWidth - ht.clientWidth;
+    const p = max > 0 ? ht.scrollLeft / max : 0;
+    const visible = Math.min(1, ht.clientWidth / ht.scrollWidth);
+    hiBar.style.width = (visible * 100) + '%';
+    hiBar.style.transform = 'translateX(' + (p * (1 / visible - 1) * 100) + '%)';
+    const idx = Math.min(cards.length - 1, Math.round(ht.scrollLeft / cardStep()));
+    hiNum.textContent = String(idx + 1).padStart(2,'0') + ' / ' + String(cards.length).padStart(2,'0');
+    hiP.disabled = ht.scrollLeft < 4; hiN.disabled = ht.scrollLeft > max - 4;
+  }
+  ht.addEventListener('scroll', histSync, {passive:true}); addEventListener('resize', histSync); histSync();
+  hiN.onclick = () => ht.scrollBy({left: cardStep(), behavior: reduce ? 'auto' : 'smooth'});
+  hiP.onclick = () => ht.scrollBy({left: -cardStep(), behavior: reduce ? 'auto' : 'smooth'});
+  ht.addEventListener('keydown', e => {
+    if(e.key === 'ArrowRight'){ e.preventDefault(); hiN.click(); }
+    if(e.key === 'ArrowLeft'){ e.preventDefault(); hiP.click(); }
+  });
+  let down = false, moved = false, sx = 0, sl = 0;
+  ht.addEventListener('pointerdown', e => { if(e.pointerType !== 'mouse') return; down = true; moved = false; sx = e.clientX; sl = ht.scrollLeft; });
+  addEventListener('pointermove', e => {
+    if(!down) return;
+    const dx = e.clientX - sx;
+    if(!moved && Math.abs(dx) > 4){ moved = true; ht.classList.add('drag'); }
+    if(moved) ht.scrollLeft = sl - dx;
+  });
+  addEventListener('pointerup', () => {
+    if(!down) return; down = false;
+    if(moved){
+      ht.classList.remove('drag');
+      const step = cardStep();
+      ht.scrollTo({left: Math.round(ht.scrollLeft / step) * step, behavior: reduce ? 'auto' : 'smooth'});
+    }
+  });
 
   /* muted loops: load + play only when visible */
   const vids = [...document.querySelectorAll('video.loop')];
@@ -922,6 +1170,13 @@ footer{background:var(--charcoal);color:rgba(246,240,228,.7);padding:clamp(48px,
   pics.forEach((b, n) => b.addEventListener('click', () => openPic(n)));
   document.querySelectorAll('.reel').forEach(r => r.addEventListener('click', () => { lbVid.src = r.dataset.video; lbC.textContent = ''; lb.classList.add('vid','on'); const p = lbVid.play(); if(p) p.catch(()=>{}); }));
   function close(){ lb.classList.remove('on'); lbVid.pause(); }
+  let lx = null;
+  lb.addEventListener('touchstart', e => { lx = e.touches[0].clientX; }, {passive:true});
+  lb.addEventListener('touchend', e => {
+    if(lx === null || lb.classList.contains('vid')) return;
+    const dx = e.changedTouches[0].clientX - lx; lx = null;
+    if(Math.abs(dx) > 50) openPic(dx < 0 ? k+1 : k-1);
+  }, {passive:true});
   document.getElementById('lbX').onclick = close;
   document.getElementById('lbP').onclick = () => openPic(k-1);
   document.getElementById('lbN').onclick = () => openPic(k+1);
@@ -1027,10 +1282,12 @@ if(window.gsap && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
         pinSpacing: true,
         anticipatePin: 1,
         scrub: 0.9,           // eased catch-up so the wheel feels weighted, never jerky
+        refreshPriority: 1,   // sits above the works wheel, so it is measured first
         onToggle: self => { if(floatBtns) floatBtns.classList.toggle('in-story', self.isActive); }
       }
     });
     builtWidth = window.innerWidth;
+    ScrollTrigger.sort();
     ScrollTrigger.refresh();
   }
 
@@ -1041,6 +1298,142 @@ if(window.gsap && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
     t = setTimeout(() => { if(window.innerWidth !== builtWidth) build(); else measure(); }, 200);
   });
   window.addEventListener('load', () => { measure(); ScrollTrigger.refresh(); });
+})();
+
+/* ---------------- HOW WE WORK: works wheel ----------------
+   Vanilla port of the WorksWheel component. At rest the steps sit in a ring
+   around a title; turning blows the ring open into a vertical drum, the front
+   card flat and full size, its neighbours rotating away in perspective and
+   swinging back along an arc. Everything is one number, `turn` - 0 is the ring,
+   1 is the drum with step 1 at the front, each whole number after that is one
+   more step turned past - eased toward `target` in a single rAF pass.
+   With GSAP, the page scroll drives `target` (section pinned, snaps to steps),
+   so a phone never gets its scroll trapped. Without it, buttons/keys/swipe do. */
+(function(){
+  const root = document.getElementById('worksWheel');
+  if(!root) return;
+  const stage = root.querySelector('.ww-stage'), wheel = root.querySelector('.ww-wheel');
+  const cards = [...root.querySelectorAll('.ww-card')];
+  const label = root.querySelector('.ww-label'), title = root.querySelector('.ww-title');
+  const tNum = title.querySelector('small'), tName = title.querySelector('span');
+  const idxBtns = [...root.querySelectorAll('.ww-index button')];
+  const prevBtn = root.querySelector('.ww-prev'), nextBtn = root.querySelector('.ww-next'), countEl = root.querySelector('.ww-count');
+  const count = cards.length, last = count - 1;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // geometry - the card is measured against the stage, everything else against the card
+  const CARD_H = 0.38, CARD_MAX_W = 0.34, CARD_RATIO = 1.45, STEP = 40, DRUM = 2.22, LENS = 2.7,
+        RING_R = 1.14, BOW = 1.82, TITLE = 0.124, CULL = 1.6, EASE = 0.12;
+  const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const rad = d => d * Math.PI / 180;
+  const bowAt = (deg, bow) => -bow * (1 - Math.cos(rad(deg)));
+  const place = (ringDeg, drumDeg, ringR, drumR, bow, m) =>
+    'translateX(' + (m * bowAt(drumDeg, bow)) + 'px) rotateZ(' + ((1 - m) * ringDeg) + 'deg) translateY(' + (-(1 - m) * ringR) +
+    'px) rotateX(' + (m * drumDeg) + 'deg) translateZ(' + (m * drumR) + 'px)';
+
+  let M = null, turn = 0, target = 0, drawn = -1, active = -1, running = false, frame = 0;
+
+  function measure(){
+    const w = stage.clientWidth, h = stage.clientHeight, narrow = w < 761;
+    // phones: the card takes most of the width, leaving room below it for the title
+    const cardW = Math.min(h * (narrow ? 0.3 : CARD_H) * CARD_RATIO, w * (narrow ? 0.8 : CARD_MAX_W));
+    const cardH = cardW / CARD_RATIO;
+    const ringR = Math.min(cardH * RING_R, narrow ? w * 0.3 : Infinity);
+    const ringScale = clamp((((2 * Math.PI * ringR) / count) * 0.82) / (cardW || 1), 0.16, 1);
+    M = { cardW, cardH, ringR, ringScale, drumR: cardH * DRUM, bow: cardH * BOW * (narrow ? 0.55 : 1), depth: cardH * LENS };
+    stage.style.perspective = M.depth + 'px';
+    cards.forEach(c => {
+      c.style.width = cardW + 'px'; c.style.height = cardH + 'px';
+      c.style.marginLeft = -cardW / 2 + 'px'; c.style.marginTop = -cardH / 2 + 'px';
+    });
+    root.style.setProperty('--ww-title', Math.max(narrow ? 24 : 28, cardH * TITLE) + 'px');
+    root.style.setProperty('--ww-cardh', cardH + 'px');
+    root.style.setProperty('--ww-title-w', Math.max(160, (w - cardW) / 2 - w * 0.06 - 28) + 'px');
+    drawn = -1;
+  }
+
+  function render(){
+    const t = turn, m = clamp(t, 0, 1), pos = Math.max(0, t - 1);
+    // the drum is pulled back so its front face lands on the picture plane
+    wheel.style.transform = 'translateZ(' + (-m * M.drumR) + 'px)';
+    for(let i = 0; i < count; i++){
+      const d = i - pos, card = cards[i];
+      card.style.transform = place(d * (360 / count), d * STEP, M.ringR, M.drumR, M.bow, m);
+      // culled by distance, not angle: past the neighbours cards pile up on the vanishing point
+      card.style.opacity = m > 0.5 && Math.abs(d) > CULL ? '0' : '1';
+      card.style.zIndex = String(Math.round(100 - Math.abs(d) * 2));
+      card.firstElementChild.style.transform = 'scale(' + lerp(M.ringScale, 1, m) + ')';
+    }
+    label.style.opacity = String(1 - m);
+    title.style.opacity = String(m);
+    const near = clamp(Math.round(pos), 0, last);
+    if(near !== active){
+      active = near;
+      tNum.textContent = 'Step ' + String(near + 1).padStart(2, '0');
+      tName.textContent = cards[near].dataset.title;
+      stage.setAttribute('aria-activedescendant', cards[near].id);
+      cards.forEach((c, k) => c.setAttribute('aria-selected', String(k === near)));
+      idxBtns.forEach((b, k) => b.setAttribute('aria-current', String(k === near)));
+    }
+    const step = Math.round(t);
+    countEl.textContent = String(step).padStart(2, '0') + ' / ' + String(count).padStart(2, '0');
+    prevBtn.disabled = step <= 0; nextBtn.disabled = step >= count;
+  }
+
+  function loop(){
+    const gap = target - turn;
+    if(Math.abs(gap) < 0.0005) turn = target; else turn += gap * (reduced ? 1 : EASE);
+    if(turn !== drawn){ render(); drawn = turn; }
+    frame = running ? requestAnimationFrame(loop) : 0;
+  }
+  function start(){ if(!running){ running = true; frame = requestAnimationFrame(loop); } }
+  function stop(){ running = false; cancelAnimationFrame(frame); frame = 0; }
+
+  measure(); render();
+  new ResizeObserver(() => { measure(); render(); }).observe(stage);
+  // only spend frames while the wheel is on screen
+  new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? start() : stop()), { rootMargin: '100px 0px' }).observe(root);
+
+  let goStep;   // bring the wheel to whole turn n (0 = ring, count = last step at the front)
+  if(window.gsap && window.ScrollTrigger && !reduced){
+    const st = ScrollTrigger.create({
+      trigger: root, start: 'top top',
+      end: () => '+=' + Math.round(innerHeight * 0.6 * count),
+      pin: true, anticipatePin: 1, invalidateOnRefresh: true,
+      onUpdate: self => { target = self.progress * count; },
+      snap: { snapTo: 1 / count, duration: { min: 0.2, max: 0.6 }, delay: 0.12, ease: 'power1.inOut' }
+    });
+    goStep = n => {
+      n = clamp(n, 0, count);
+      window.scrollTo({ top: st.start + (st.end - st.start) * (n / count), behavior: 'smooth' });
+    };
+  } else {
+    goStep = n => { target = clamp(n, 0, count); start(); };
+    // touch: a sideways swipe turns the wheel, vertical stays page scroll
+    let sx = null, sy = 0;
+    stage.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+    stage.addEventListener('touchend', e => {
+      if(sx === null) return;
+      const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy; sx = null;
+      if(Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) goStep(Math.round(target) + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+    root.querySelector('.ww-hint').textContent = 'Swipe or use the arrows';
+  }
+  const now = () => Math.round(target);
+  nextBtn.onclick = () => goStep(now() + 1);
+  prevBtn.onclick = () => goStep(now() - 1);
+  idxBtns.forEach(b => b.onclick = () => goStep(+b.dataset.i + 1));
+  cards.forEach((c, k) => c.addEventListener('click', () => { if(now() !== k + 1) goStep(k + 1); }));
+  stage.addEventListener('keydown', e => {
+    if(e.key === 'ArrowDown' || e.key === 'ArrowRight') goStep(now() + 1);
+    else if(e.key === 'ArrowUp' || e.key === 'ArrowLeft') goStep(now() - 1);
+    else if(e.key === 'Home') goStep(0);
+    else if(e.key === 'End') goStep(count);
+    else return;
+    e.preventDefault();
+  });
+  addEventListener('load', () => { if(window.ScrollTrigger) ScrollTrigger.refresh(); });
 })();
 </script>
 </body>
