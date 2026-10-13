@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aruna Textile — Weave a Brighter Tomorrow</title>
+<meta name="description" content="Handtufted, pitloom, braided, broadloom and jacquard rugs — shaped by hand in our own workshop in India since 2016.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/hq/living-2000.webp" imagesrcset="assets/hq/living-1000.webp 1000w, assets/hq/living-2000.webp 1733w" imagesizes="100vw">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --paper:#FBF8F3;
+  --white:#FFFFFF;
+  --sand:#F1EADF;
+  --ink:#1E1812;
+  --ink-soft:#62574B;
+  --charcoal:#15110C;
+  --rust:#A24E2A;
+  --rust-dark:#7E3B1E;
+  --brass:#C9A462;
+  --line:rgba(30,24,18,.12);
+  --cream:#F6F0E4;
+  --gutter:clamp(16px,3.4vw,48px);
+  --container:1560px;
+  --sec:clamp(64px,9vw,136px);
+  --gap:clamp(8px,1vw,14px);
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Work Sans',system-ui,sans-serif;font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;color:inherit}
+h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:300;margin:0;letter-spacing:-.015em;line-height:1.08}
+em{font-style:italic;font-weight:300;color:var(--rust)}
+p{margin:0}
+::selection{background:var(--rust);color:#fff}
+:focus-visible{outline:2px solid var(--rust);outline-offset:3px}
+.wrap{max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}
+.sec{margin-top:var(--sec)}
+
+/* type */
+.kicker{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:18px;display:block}
+.h-xl{font-size:clamp(34px,5.4vw,80px)}
+.h-lg{font-size:clamp(30px,4vw,58px)}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:clamp(24px,3vw,44px)}
+.link{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:4px;transition:color .3s}
+.link:hover{color:var(--rust)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 30px;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;border:1px solid var(--ink);background:var(--ink);color:var(--cream);transition:.35s var(--ease)}
+.btn:hover{background:var(--rust);border-color:var(--rust)}
+.btn.ghost{background:transparent;color:var(--cream);border-color:rgba(246,240,228,.7)}
+.btn.ghost:hover{background:var(--cream);color:var(--ink);border-color:var(--cream)}
+.btn.light{background:var(--cream);color:var(--ink);border-color:var(--cream)}
+.btn.light:hover{background:var(--rust);color:#fff;border-color:var(--rust)}
+
+/* image helper: zoom on hover */
+.zoom{overflow:hidden;position:relative;background:var(--sand)}
+.zoom img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.zoom:hover img{transform:scale(1.05)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(28px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv-img{clip-path:inset(12% 0 0 0);transition:clip-path 1.3s var(--ease)}
+.rv-img.in{clip-path:inset(0 0 0 0)}
+
+/* ============ NAV ============ */
+.nav{position:fixed;inset:0 0 auto 0;z-index:100;transition:background .4s,color .4s,box-shadow .4s;color:var(--cream)}
+.nav-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:78px;max-width:var(--container);margin:0 auto;padding:0 var(--gutter);transition:height .4s}
+.nav.solid{background:rgba(251,248,243,.94);color:var(--ink);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+.nav.solid .nav-inner{height:64px}
+.nav-links{display:flex;gap:30px;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase}
+.nav-links a{position:relative;padding:6px 0}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:0;height:1px;width:0;background:currentColor;transition:width .35s var(--ease)}
+.nav-links a:hover::after{width:100%}
+.brand{text-align:center;line-height:1}
+.brand b{display:block;font-family:'Fraunces',Georgia,serif;font-weight:400;font-size:20px;letter-spacing:.14em;white-space:nowrap}
+.brand small{display:block;font-size:8.5px;letter-spacing:.42em;margin-top:6px;opacity:.8}
+.nav-right{display:flex;justify-content:flex-end;align-items:center;gap:22px}
+.nav-shop{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;padding:11px 22px;border:1px solid currentColor;transition:.3s}
+.nav-shop:hover{background:var(--rust);border-color:var(--rust);color:#fff}
+.burger{display:none;width:26px;height:16px;position:relative;background:none;border:0;padding:0}
+.burger span{position:absolute;left:0;right:0;height:1.5px;background:currentColor}
+.burger span:nth-child(1){top:0}.burger span:nth-child(2){top:7px}.burger span:nth-child(3){top:14px}
+.mmenu{position:fixed;inset:0;z-index:300;background:var(--charcoal);color:var(--cream);display:flex;flex-direction:column;justify-content:center;padding:0 32px;gap:18px;transform:translateY(-100%);transition:transform .55s var(--ease)}
+.mmenu.open{transform:none}
+.mmenu a{font-family:'Fraunces',Georgia,serif;font-weight:300;font-size:34px}
+.mmenu .x{position:absolute;top:22px;right:24px;background:none;border:0;color:var(--cream);font-size:26px}
+
+/* ============ HERO ============ */
+.hero{position:relative;height:100vh;height:100svh;min-height:560px;color:var(--cream);overflow:hidden;background:var(--charcoal)}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease}
+.slide.on{opacity:1}
+.slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.08)}
+.slide.on img{transform:scale(1);transition:transform 7s linear}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,11,8,.72) 0%,rgba(15,11,8,.15) 45%,rgba(15,11,8,.35) 100%);pointer-events:none}
+.hero-copy{position:absolute;z-index:2;left:0;right:0;bottom:clamp(56px,9vh,110px)}
+.hero-copy .kicker{color:#E8C98A;text-shadow:0 1px 14px rgba(0,0,0,.6)}
+.hero h1{font-size:clamp(44px,8vw,128px);line-height:.95;color:var(--cream);max-width:12ch}
+.hero h1 em{color:var(--brass)}
+.hero-row{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.hero-ctrl{display:flex;align-items:center;gap:18px;font-size:12px;letter-spacing:.2em}
+.hero-ctrl button{width:46px;height:46px;border-radius:50%;border:1px solid rgba(246,240,228,.5);background:transparent;color:var(--cream);transition:.3s}
+.hero-ctrl button:hover{background:var(--cream);color:var(--ink)}
+.hero-bar{width:120px;height:1px;background:rgba(246,240,228,.3);position:relative;overflow:hidden}
+.hero-bar i{position:absolute;inset:0;background:var(--cream);transform-origin:left;transform:scaleX(0)}
+.hero-bar i.run{animation:bar 6s linear forwards}
+@keyframes bar{to{transform:scaleX(1)}}
+.hero-cap{position:absolute;z-index:2;right:var(--gutter);top:110px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;writing-mode:vertical-rl;opacity:.75}
+
+/* ============ INTRO ============ */
+.intro{text-align:center;max-width:980px;margin-left:auto;margin-right:auto}
+.intro p{font-size:clamp(15px,1.2vw,17px);color:var(--ink-soft);max-width:52ch;margin:22px auto 0}
+.intro .btn{margin-top:30px}
+
+/* ============ TECHNIQUES (image tiles) ============ */
+.tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--gap)}
+.tile{position:relative;display:block;aspect-ratio:3/4.4;overflow:hidden;color:var(--cream);background:var(--sand)}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .8s ease,transform 1.4s var(--ease)}
+.tile img.b{opacity:0}
+.tile:hover img{transform:scale(1.06)}
+.tile:hover img.b{opacity:1}
+.tile::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,11,8,.65) 0%,rgba(15,11,8,0) 42%)}
+.tile-cap{position:absolute;z-index:2;left:22px;right:22px;bottom:20px;display:flex;justify-content:space-between;align-items:flex-end}
+.tile-cap h3{font-size:clamp(22px,1.9vw,30px)}
+.tile-cap span{font-size:18px;transition:transform .4s var(--ease)}
+.tile:hover .tile-cap span{transform:translateX(6px)}
+
+/* ============ FULL-BLEED BANNER ============ */
+.banner{position:relative;height:clamp(420px,82vh,860px);overflow:hidden;color:var(--cream);display:flex;align-items:center;justify-content:center;text-align:center}
+.banner > img,.banner > video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.banner::after{content:'';position:absolute;inset:0;background:rgba(15,11,8,.38)}
+.banner-copy{position:relative;z-index:2;padding:0 24px}
+.banner h2{font-size:clamp(34px,5.6vw,88px);color:var(--cream);max-width:14ch;margin:0 auto}
+.banner h2 em{color:var(--brass)}
+.banner .btn{margin-top:30px}
+
+/* ============ SPACES (bento) ============ */
+.bento{display:grid;grid-template-columns:1.6fr 1fr 1fr;grid-template-rows:repeat(2,clamp(220px,25vw,400px));gap:var(--gap)}
+.bento .a{grid-row:1/3}
+.bento .d{grid-column:2/4}
+.bento figure{margin:0;position:relative}
+.bento figure::after{content:'';position:absolute;inset:auto 0 0 0;height:40%;background:linear-gradient(0deg,rgba(15,11,8,.5),rgba(15,11,8,0));pointer-events:none}
+.bento figcaption{position:absolute;left:18px;bottom:16px;z-index:2;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cream);text-shadow:0 1px 12px rgba(0,0,0,.5)}
+
+/* ============ PROCESS STRIP ============ */
+.strip-wrap{position:relative}
+.strip{display:flex;gap:var(--gap);overflow-x:auto;scroll-snap-type:x mandatory;padding:0 var(--gutter);scroll-padding:0 var(--gutter);scrollbar-width:none;cursor:grab}
+.strip::-webkit-scrollbar{display:none}
+.strip.drag{cursor:grabbing;scroll-snap-type:none}
+.step{flex:0 0 clamp(250px,26vw,420px);scroll-snap-align:start;margin:0}
+.step .zoom{aspect-ratio:3/4}
+.step img{pointer-events:none;-webkit-user-drag:none}
+.step figcaption{display:flex;gap:14px;align-items:baseline;padding-top:16px}
+.step figcaption b{font-family:'Fraunces',Georgia,serif;font-weight:300;font-size:14px;color:var(--rust)}
+.step figcaption span{font-family:'Fraunces',Georgia,serif;font-size:clamp(20px,1.6vw,26px);font-weight:300}
+.arrows{display:flex;gap:10px}
+.arrows button{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:var(--white);transition:.3s}
+.arrows button:hover{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+
+/* ============ HERITAGE / STATS ============ */
+.heritage{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(28px,5vw,88px);align-items:center}
+.heritage .zoom{aspect-ratio:4/3.4}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,3vw,44px) 28px;margin-top:clamp(28px,3.5vw,52px);padding-top:clamp(24px,3vw,40px);border-top:1px solid var(--line)}
+.stat b{display:block;font-family:'Fraunces',Georgia,serif;font-weight:300;font-size:clamp(40px,4.4vw,68px);line-height:1;color:var(--ink)}
+.stat span{display:block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-top:10px}
+.timeline{display:flex;flex-wrap:wrap;gap:8px;margin-top:clamp(24px,3vw,36px)}
+.timeline span{font-size:12px;padding:8px 14px;border:1px solid var(--line);border-radius:30px;color:var(--ink-soft)}
+.timeline span b{font-weight:500;color:var(--rust);margin-right:6px}
+
+/* ============ REELS ============ */
+.reels{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap)}
+.reel{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--charcoal);border:0;padding:0;color:var(--cream);text-align:left}
+.reel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.reel:hover video{transform:scale(1.05)}
+.reel::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,11,8,.6),rgba(15,11,8,0) 40%)}
+.reel span{position:absolute;z-index:2;left:18px;bottom:16px;font-family:'Fraunces',Georgia,serif;font-size:clamp(17px,1.4vw,21px)}
+.reel i{position:absolute;z-index:2;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:1px solid rgba(246,240,228,.55);display:flex;align-items:center;justify-content:center;font-style:normal;font-size:11px;transition:.3s}
+.reel:hover i{background:var(--cream);color:var(--ink)}
+
+/* ============ GALLERY (masonry) ============ */
+.masonry{columns:4;column-gap:var(--gap)}
+.masonry button{display:block;width:100%;margin:0 0 var(--gap);padding:0;border:0;break-inside:avoid;background:var(--sand)}
+.masonry img{width:100%;height:auto}
+
+/* ============ MARQUEE ============ */
+.marquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(22px,2.6vw,34px) 0;background:var(--white)}
+.marquee-track{display:flex;width:max-content;animation:mq 42s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee-track span{font-family:'Fraunces',Georgia,serif;font-weight:300;font-size:clamp(24px,2.8vw,42px);white-space:nowrap;padding:0 clamp(18px,2vw,32px);display:flex;align-items:center;gap:clamp(36px,4vw,64px)}
+.marquee-track span::after{content:'✦';font-size:.5em;color:var(--brass)}
+.marquee-track span:nth-child(even){font-style:italic;color:var(--rust)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ============ CONTACT ============ */
+.contact{position:relative;min-height:clamp(520px,88vh,900px);display:flex;align-items:flex-end;color:var(--cream);overflow:hidden}
+.contact > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.contact::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,11,8,.85) 0%,rgba(15,11,8,.25) 60%,rgba(15,11,8,.2) 100%)}
+.contact .wrap{position:relative;z-index:2;width:100%;padding-bottom:clamp(48px,7vw,96px)}
+.contact h2{font-size:clamp(40px,6.6vw,104px);color:var(--cream);max-width:12ch}
+.contact h2 em{color:var(--brass)}
+.contact-row{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;flex-wrap:wrap;margin-top:30px}
+.contact-cta{display:flex;gap:12px;flex-wrap:wrap}
+.addr{font-size:13.5px;line-height:1.7;color:rgba(246,240,228,.82)}
+.addr b{display:block;font-weight:400;font-size:10.5px;letter-spacing:.22em;color:var(--brass);margin-bottom:6px}
+
+/* ============ FOOTER ============ */
+footer{background:var(--charcoal);color:rgba(246,240,228,.7);padding:clamp(48px,6vw,80px) 0 28px;font-size:13.5px}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+.foot .brand{text-align:left;color:var(--cream)}
+.foot h5{margin:0 0 14px;font-size:10.5px;letter-spacing:.22em;font-weight:400;color:var(--brass)}
+.foot a{display:block;margin-bottom:8px;transition:color .3s}
+.foot a:hover{color:var(--cream)}
+.socials{display:flex;gap:10px;margin-top:22px}
+.socials a{width:38px;height:38px;border-radius:50%;border:1px solid rgba(246,240,228,.2);display:flex;align-items:center;justify-content:center;margin:0}
+.socials a:hover{background:var(--rust);border-color:var(--rust);color:#fff}
+.si{width:16px;height:16px}
+.foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:clamp(36px,4vw,56px);padding-top:20px;border-top:1px solid rgba(246,240,228,.12);font-size:12px;color:rgba(246,240,228,.45)}
+
+/* floating WhatsApp */
+.wa{position:fixed;right:20px;bottom:20px;z-index:90;width:54px;height:54px;border-radius:50%;background:#2E7D4F;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px -12px rgba(0,0,0,.5);transition:transform .3s}
+.wa:hover{transform:translateY(-3px)}
+.wa .si{width:24px;height:24px}
+
+/* ============ LIGHTBOX ============ */
+.lb{position:fixed;inset:0;z-index:400;background:rgba(12,9,6,.96);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s}
+.lb.on{opacity:1;pointer-events:auto}
+.lb img,.lb video{max-width:min(92vw,1600px);max-height:86vh;object-fit:contain}
+.lb video{display:none;background:#000}
+.lb.vid video{display:block}.lb.vid img{display:none}
+.lb .x,.lb .pv,.lb .nx{position:absolute;background:none;border:0;color:var(--cream);font-size:26px;padding:14px}
+.lb .x{top:14px;right:18px}
+.lb .pv{left:10px;top:50%;transform:translateY(-50%)}
+.lb .nx{right:10px;top:50%;transform:translateY(-50%)}
+.lb.vid .pv,.lb.vid .nx{display:none}
+.lb-count{position:absolute;bottom:20px;left:0;right:0;text-align:center;font-size:11px;letter-spacing:.2em;color:rgba(246,240,228,.6)}
+
+/* ============ ABOUT US — scroll-driven Charakha journey ============ */
+.journey{padding:clamp(28px,4vw,56px) 0;display:flex;flex-direction:column;justify-content:center;background:var(--paper)}
+.journey-inner{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);grid-template-areas:"wheel intro" "wheel steps";column-gap:clamp(32px,5vw,88px);row-gap:clamp(22px,2.6vw,34px);align-items:center;width:100%}
+.journey-top{grid-area:intro;align-self:end}
+.journey-top p{font-size:clamp(15px,1.1vw,16.5px);line-height:1.7;color:var(--ink-soft);max-width:46ch;margin-top:18px}
+.charakha{grid-area:wheel;position:relative;margin:0;width:100%;max-width:820px;justify-self:center;aspect-ratio:1470/978}
+.charakha-glow{position:absolute;left:-12%;top:-18.5%;width:80%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(185,148,79,.14) 0%,rgba(185,148,79,.05) 40%,rgba(185,148,79,0) 68%);pointer-events:none}
+.charakha-shadow{position:absolute;left:12%;right:-2%;bottom:-4%;height:10%;background:radial-gradient(ellipse at center,rgba(33,27,20,.22) 0%,rgba(33,27,20,0) 70%);pointer-events:none}
+.charakha-wheel{position:absolute;left:.4925%;top:.3139%;width:54.966%;height:auto;aspect-ratio:1;transform:rotate(var(--rotation,0deg));transform-origin:50% 50%;will-change:transform}
+.charakha-band,.charakha-frame{position:absolute;inset:0;width:100%;height:100%}
+.charakha-band{overflow:visible;pointer-events:none}
+.milestones{grid-area:steps;list-style:none;margin:0;padding:0 0 0 36px;position:relative;display:grid;gap:clamp(14px,1.7vw,22px);--axis:y}
+.ms-track{position:absolute;left:9px;top:var(--t0,10px);width:2px;height:var(--tlen,0px);background:var(--line);border-radius:2px;overflow:hidden}
+.ms-fill{position:absolute;inset:0;background:linear-gradient(180deg,var(--brass),var(--rust));transform-origin:top;transform:scaleY(var(--tp,0))}
+.milestone{position:relative}
+.ms-dot{position:absolute;left:-36px;top:5px;width:20px;height:20px;border-radius:50%;border:2px solid rgba(30,24,18,.2);background:var(--paper);transition:background .5s,border-color .5s,box-shadow .5s}
+.milestone.is-on .ms-dot{border-color:var(--rust);background:var(--rust)}
+.milestone.is-current .ms-dot{box-shadow:0 0 0 6px rgba(162,78,42,.14)}
+.ms-body{opacity:0;transform:translateY(10px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.milestone.is-on .ms-body{opacity:.86;transform:none}
+.milestone.is-current .ms-body{opacity:1}
+.ms-year{display:block;font-family:'Fraunces',Georgia,serif;font-weight:300;font-size:clamp(24px,2.2vw,32px);line-height:1.15;color:var(--ink)}
+.milestone.is-current .ms-year{color:var(--rust)}
+.ms-body p{font-size:14px;color:var(--ink-soft);margin-top:2px}
+@media(max-width:899px){
+  .journey-inner{grid-template-columns:1fr;grid-template-areas:"intro" "wheel" "steps";row-gap:clamp(18px,3vw,28px)}
+  .charakha{max-width:640px}
+  .milestones{grid-template-columns:repeat(4,1fr);gap:16px;padding:32px 0 0;--axis:x}
+  .ms-track{left:var(--t0,10px);top:9px;width:var(--tlen,0px);height:2px}
+  .ms-fill{background:linear-gradient(90deg,var(--brass),var(--rust));transform-origin:left;transform:scaleX(var(--tp,0))}
+  .ms-dot{left:0;top:-32px}
+}
+@media(max-width:560px){
+  .milestones{grid-template-columns:1fr 1fr;gap:14px 16px;padding:0;--axis:none}
+  .ms-track{display:none}
+  .milestone{padding-left:24px}
+  .ms-dot{top:6px;width:14px;height:14px;left:0}
+  .ms-year{font-size:22px}
+  .ms-body p{font-size:13.5px;line-height:1.45}
+}
+@media (prefers-reduced-motion:reduce){.ms-body{opacity:1;transform:none}}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:1100px){
+  .tiles{grid-template-columns:repeat(3,1fr)}
+  .tiles .tile:nth-child(4),.tiles .tile:nth-child(5){aspect-ratio:4/3.6}
+  .tiles{grid-template-areas:none}
+  .reels{grid-template-columns:repeat(3,1fr)}
+  .masonry{columns:3}
+  .foot{grid-template-columns:1fr 1fr}
+}
+@media(max-width:980px){
+  .nav-links{display:none}
+  .burger{display:block}
+  .nav-inner{grid-template-columns:auto 1fr auto}
+  .brand{text-align:left;grid-column:1}
+  .nav-right{grid-column:3}
+  .heritage{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+  .tiles{grid-template-columns:1fr 1fr}
+  .tiles .tile{aspect-ratio:3/4}
+  .tiles .tile:nth-child(1){grid-column:1/-1;aspect-ratio:4/3.4}
+  .tiles .tile:nth-child(4),.tiles .tile:nth-child(5){aspect-ratio:3/4}
+  .tile-cap{left:14px;right:14px;bottom:12px}
+  .bento{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .bento .a{grid-column:1/-1;grid-row:auto;aspect-ratio:4/3}
+  .bento .b,.bento .c{aspect-ratio:3/4}
+  .bento .d{grid-column:1/-1;aspect-ratio:16/10}
+  .reels{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(-1*var(--gutter));padding:0 var(--gutter);scrollbar-width:none}
+  .reels::-webkit-scrollbar{display:none}
+  .reel{flex:0 0 62%;scroll-snap-align:start}
+  .masonry{columns:2}
+  .hero-cap{display:none}
+  .hero-ctrl .hero-bar{width:70px}
+  .nav-shop{padding:9px 16px}
+  .step{flex-basis:72vw}
+  .arrows{display:none}
+  .foot{grid-template-columns:1fr}
+}
+@media(max-width:420px){
+  .brand b{font-size:18px;letter-spacing:.16em}
+  .nav-shop{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important}
+  .rv{opacity:1;transform:none}.rv-img{clip-path:none}
+}
+
+/* ============ v5: original copy, image-led display ============ */
+.kicker{color:var(--rust)}
+.lead{font-size:clamp(15px,1.15vw,17px);line-height:1.75;color:var(--ink-soft);max-width:54ch;margin-top:18px}
+.on-dark .lead,.on-dark p{color:rgba(246,240,228,.88)}
+.on-dark .kicker{color:var(--brass)}
+.on-dark h2,.on-dark h3,.on-dark h4{color:var(--cream)}
+.on-dark em{color:var(--brass)}
+.hero h1{max-width:none}
+.hero h1 span{display:block}
+.hero-lead{margin-top:20px;max-width:44ch;font-size:clamp(15px,1.2vw,17px);color:rgba(246,240,228,.92)}
+.tagcard{display:inline-flex;align-items:center;gap:12px;margin-top:22px;padding:10px 18px;border:1px solid rgba(246,240,228,.3);border-radius:30px;background:rgba(15,11,8,.35);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);font-size:12px}
+.tagcard b{font-family:'Fraunces',Georgia,serif;font-weight:400;color:var(--brass);font-size:14px}
+
+/* history rail */
+.rail{overflow:hidden;margin-top:clamp(40px,5vw,72px)}
+.rail .kicker{margin-bottom:20px}
+.rail-track{display:flex;gap:var(--gap);width:max-content;animation:mq 60s linear infinite}
+.rail:hover .rail-track{animation-play-state:paused}
+.hist{flex:0 0 clamp(250px,22vw,330px);margin:0}
+.hist .zoom{aspect-ratio:4/5}
+.hist figcaption{padding-top:14px}
+.hist h4{font-size:20px;font-weight:400}
+.hist p{font-size:13.5px;line-height:1.55;color:var(--ink-soft);margin-top:6px}
+
+/* about */
+.about{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(28px,5vw,88px);align-items:center}
+.about .zoom{aspect-ratio:4/4.4}
+.about .btn{margin-top:28px}
+.values{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap);margin-top:clamp(28px,3.5vw,52px)}
+.value{position:relative;aspect-ratio:3/3.6;overflow:hidden;color:var(--cream)}
+.value img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.value:hover img{transform:scale(1.06)}
+.value::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,11,8,.82) 0%,rgba(15,11,8,.1) 60%)}
+.value div{position:absolute;z-index:2;left:18px;right:18px;bottom:16px}
+.value h4{font-size:clamp(18px,1.5vw,22px);font-weight:400;color:var(--cream)}
+.value p{font-size:13px;margin-top:4px;color:rgba(246,240,228,.88)}
+
+/* vision & mission */
+.vm{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.vm-card{position:relative;min-height:clamp(440px,48vw,640px);overflow:hidden;display:flex;align-items:flex-end;color:var(--cream)}
+.vm-card > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
+.vm-card:hover > img{transform:scale(1.05)}
+.vm-card::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,11,8,.88) 0%,rgba(15,11,8,.35) 55%,rgba(15,11,8,.1) 100%)}
+.vm-body{position:relative;z-index:2;padding:clamp(24px,3.4vw,48px)}
+.vm-tag{display:inline-block;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;padding:6px 12px;border:1px solid rgba(246,240,228,.4);border-radius:20px;margin-bottom:16px}
+.vm-body h3{font-size:clamp(28px,3vw,44px)}
+.vm-body p{margin-top:12px;max-width:44ch;font-size:15px}
+.chips{list-style:none;padding:0;margin:18px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+.chips li{font-size:12px;padding:6px 14px;border-radius:20px;background:rgba(246,240,228,.14);border:1px solid rgba(246,240,228,.25)}
+
+/* banners — keep original uppercase statements */
+.banner h3{font-family:'Fraunces',Georgia,serif;font-weight:300;font-size:clamp(28px,4.4vw,64px);line-height:1.12;color:var(--cream);max-width:18ch;margin:0 auto;letter-spacing:.01em}
+
+/* how we work */
+.split-head{display:grid;grid-template-columns:1fr 1fr;gap:16px 60px;align-items:end;margin-bottom:clamp(24px,3vw,44px)}
+.split-head .lead{margin-top:0;justify-self:end}
+.step figcaption{flex-direction:column;gap:4px}
+
+/* techniques */
+.tile-cap{flex-direction:column;align-items:flex-start;gap:4px}
+.tile-cap small{font-size:10.5px;letter-spacing:.14em;color:var(--brass)}
+.tile-cap p{font-size:12.5px;line-height:1.45;color:rgba(246,240,228,.9);max-height:0;opacity:0;overflow:hidden;transition:max-height .6s var(--ease),opacity .5s}
+.tile:hover .tile-cap p,.tile:focus-visible .tile-cap p{max-height:80px;opacity:1}
+.tile::after{background:linear-gradient(0deg,rgba(15,11,8,.78) 0%,rgba(15,11,8,0) 50%)}
+@media(hover:none){.tile-cap p{max-height:none;opacity:1}}
+
+/* quote bento */
+.bento .quote{background:var(--sand);display:flex;flex-direction:column;justify-content:center;padding:clamp(22px,2.6vw,40px)}
+.bento .quote blockquote{margin:0;font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:300;font-size:clamp(22px,2.2vw,34px);line-height:1.2;color:var(--ink)}
+.bento .quote p{font-size:14px;color:var(--ink-soft);margin-top:14px}
+.bento .quote .link{margin-top:18px;align-self:flex-start}
+
+/* team */
+.team{position:relative;min-height:clamp(520px,86vh,860px);display:flex;align-items:flex-end;overflow:hidden}
+.team > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.team::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,11,8,.88) 0%,rgba(15,11,8,.35) 55%,rgba(15,11,8,.1) 100%),linear-gradient(90deg,rgba(15,11,8,.5),rgba(15,11,8,0) 60%)}
+.team .wrap{position:relative;z-index:2;width:100%;padding-bottom:clamp(44px,6vw,88px)}
+.team h2{font-size:clamp(36px,5vw,76px);max-width:14ch}
+.team .btn{margin-top:26px}
+
+/* infrastructure */
+.stat-row{display:grid;grid-template-columns:auto 1fr 1fr;gap:14px 26px;align-items:start;margin-top:clamp(26px,3vw,40px);padding-top:clamp(22px,2.6vw,34px);border-top:1px solid var(--line)}
+.stat-big{grid-row:1/3}
+.stat-big b{display:block;font-family:'Fraunces',Georgia,serif;font-weight:300;font-size:clamp(46px,5vw,76px);line-height:1;color:var(--rust)}
+.stat-big span{display:block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-top:10px;max-width:16ch}
+.mini{display:flex;gap:10px;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--ink-soft)}
+.mini i{font-style:normal;width:30px;height:30px;flex:none;border-radius:50%;background:var(--sand);display:flex;align-items:center;justify-content:center;color:var(--rust);font-size:13px}
+
+/* reels with descriptions */
+.reel .rc{position:absolute;z-index:2;left:16px;right:16px;bottom:14px}
+.reel .rc small{display:block;font-size:10.5px;letter-spacing:.14em;color:var(--brass)}
+.reel .rc b{display:block;font-family:'Fraunces',Georgia,serif;font-weight:400;font-size:clamp(17px,1.4vw,21px)}
+.reel .rc span{position:static;display:block;font-family:'Work Sans',sans-serif;font-size:12.5px;line-height:1.45;color:rgba(246,240,228,.88);margin-top:4px}
+.reel::after{background:linear-gradient(0deg,rgba(15,11,8,.85) 0%,rgba(15,11,8,.35) 40%,rgba(15,11,8,0) 65%)}
+
+/* commitment */
+.commit{position:relative;overflow:hidden;padding:clamp(64px,8vw,120px) 0}
+.commit > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.commit::after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,rgba(15,11,8,.92) 35%,rgba(15,11,8,.6))}
+.commit .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,80px)}
+.commit-list{list-style:none;margin:0;padding:0;border-top:1px solid rgba(246,240,228,.18)}
+.commit-list li{display:flex;gap:18px;align-items:baseline;padding:18px 0;border-bottom:1px solid rgba(246,240,228,.18);font-size:15px;color:rgba(246,240,228,.92)}
+.commit-list li b{font-family:'Fraunces',Georgia,serif;font-weight:300;color:var(--brass);font-size:14px}
+
+/* contact */
+.contact .lead{color:rgba(246,240,228,.88)}
+.find{background:rgba(15,11,8,.5);border:1px solid rgba(246,240,228,.2);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);padding:22px 24px;max-width:420px;font-size:13.5px;color:rgba(246,240,228,.88)}
+.find h5{margin:0 0 6px;font-size:10.5px;letter-spacing:.22em;font-weight:400;color:var(--brass)}
+.find > div + div{margin-top:16px;padding-top:16px;border-top:1px solid rgba(246,240,228,.15)}
+.find .socials{margin-top:12px}
+.find .socials a{width:34px;height:34px}
+
+/* footer + floating socials */
+.foot p{max-width:32ch;margin-top:14px;color:rgba(246,240,228,.6)}
+.float{position:fixed;right:18px;bottom:18px;z-index:90;display:flex;flex-direction:column;gap:10px}
+.float a{width:46px;height:46px;border-radius:50%;background:var(--white);color:var(--ink);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px -14px rgba(0,0,0,.45);transition:.3s}
+.float a:hover{background:var(--ink);color:var(--cream)}
+.float a.wa{position:static;width:46px;height:46px;background:#2E7D4F;color:#fff;border-color:#2E7D4F}
+.float .si{width:19px;height:19px}
+
+@media(max-width:1100px){.values{grid-template-columns:1fr 1fr}}
+@media(max-width:980px){
+  .about,.commit .wrap,.split-head{grid-template-columns:1fr}
+  .split-head .lead{justify-self:start}
+  .about .zoom{aspect-ratio:16/12}
+}
+@media(max-width:760px){
+  .vm{grid-template-columns:1fr}
+  .stat-row{grid-template-columns:1fr 1fr}
+  .stat-big{grid-column:1/-1;grid-row:auto}
+  .reel{flex-basis:72%}
+  .float{right:12px;bottom:12px}
+  .float a:not(.wa){display:none}
+  .bento .quote{grid-column:1/-1;aspect-ratio:auto}
+}
+@media(max-width:760px){
+  .hero::after{background:linear-gradient(0deg,rgba(15,11,8,.88) 0%,rgba(15,11,8,.55) 50%,rgba(15,11,8,.35) 100%)}
+  .contact::after{background:linear-gradient(0deg,rgba(15,11,8,.92) 0%,rgba(15,11,8,.7) 60%,rgba(15,11,8,.45) 100%)}
+  .contact .wrap{padding-top:120px}
+  .find{max-width:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#craft">Our Craft</a>
+      <a href="#products">Techniques</a>
+    </div>
+    <a href="#home" class="brand"><b>ARUNA TEXTILE</b><small>WOVEN IN INDIA</small></a>
+    <div class="nav-right">
+      <div class="nav-links"><a href="#infrastructure">Infrastructure</a><a href="#contact">Contact</a></div>
+      <a href="https://radiant-khapse-0df5b6.netlify.app/" class="nav-shop">Shop</a>
+      <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="mmenu" id="mmenu">
+  <button class="x" id="mclose" aria-label="Close menu">&#10005;</button>
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#craft">Our Craft</a>
+  <a href="#products">Techniques</a>
+  <a href="#infrastructure">Infrastructure</a>
+  <a href="#contact">Contact</a>
+  <a href="https://radiant-khapse-0df5b6.netlify.app/" style="color:var(--brass)">Shop &rarr;</a>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="home">
+  <!-- <div class="slide on"><img src="assets/hq/living-2000.webp" srcset="assets/hq/living-1000.webp 1000w, assets/hq/living-2000.webp 1733w" sizes="100vw" alt="Aruna geometric hand-tufted rug styled in a living room"></div> -->
+  <!-- placeholder room shot (Unsplash, free licence) — replace with Aruna rug in a room -->
+  <div class="slide"><img src="https://images.unsplash.com/photo-1534889156217-d643df14f14a?auto=format&fit=crop&q=80&w=2400" srcset="https://images.unsplash.com/photo-1534889156217-d643df14f14a?auto=format&fit=crop&q=80&w=1200 1200w, https://images.unsplash.com/photo-1534889156217-d643df14f14a?auto=format&fit=crop&q=80&w=2400 2400w" sizes="100vw" alt="Teal sofa on a red area rug in a living room" loading="lazy" referrerpolicy="no-referrer"></div>
+  <!-- placeholder room shot (Unsplash, free licence) — replace with Aruna rug in a room -->
+  <div class="slide"><img src="https://images.unsplash.com/photo-1598928545925-1b288f3e5d3e?auto=format&fit=crop&q=80&w=2400" srcset="https://images.unsplash.com/photo-1598928545925-1b288f3e5d3e?auto=format&fit=crop&q=80&w=1200 1200w, https://images.unsplash.com/photo-1598928545925-1b288f3e5d3e?auto=format&fit=crop&q=80&w=2400 2400w" sizes="100vw" alt="Living room with an ivory and brown area rug and leather armchair" loading="lazy" referrerpolicy="no-referrer"></div>
+  <!-- placeholder room shot (Unsplash, free licence) — replace with Aruna rug in a room -->
+  <div class="slide"><img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&q=80&w=2400" srcset="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&q=80&w=1200 1200w, https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&q=80&w=2400 2400w" sizes="100vw" alt="Bright living room with a large rug under the seating" loading="lazy" referrerpolicy="no-referrer"></div>
+  <!-- placeholder room shot (Unsplash, free licence) — replace with Aruna rug in a room -->
+  <div class="slide"><img src="https://images.unsplash.com/photo-1616047006789-b7af5afb8c20?auto=format&fit=crop&q=80&w=2400" srcset="https://images.unsplash.com/photo-1616047006789-b7af5afb8c20?auto=format&fit=crop&q=80&w=1200 1200w, https://images.unsplash.com/photo-1616047006789-b7af5afb8c20?auto=format&fit=crop&q=80&w=2400 2400w" sizes="100vw" alt="Living room with a tan sectional sofa over an area rug" loading="lazy" referrerpolicy="no-referrer"></div>
+  <!-- placeholder room shot (Unsplash, free licence) — replace with Aruna rug in a room -->
+  <div class="slide"><img src="https://images.unsplash.com/photo-1572123979839-3749e9973aba?auto=format&fit=crop&q=80&w=2400" srcset="https://images.unsplash.com/photo-1572123979839-3749e9973aba?auto=format&fit=crop&q=80&w=1200 1200w, https://images.unsplash.com/photo-1572123979839-3749e9973aba?auto=format&fit=crop&q=80&w=2400 2400w" sizes="100vw" alt="Large multi-coloured rug styled in a room" loading="lazy" referrerpolicy="no-referrer"></div>
+  <div class="hero-copy wrap">
+    <span class="kicker">CRAFTING EXCEPTIONAL HANDMADE RUGS &amp; CARPETS</span>
+    <div class="hero-row">
+      <div>
+        <h1><span>Weave a</span><span><em>brighter</em></span><span>tomorrow</span></h1>
+        <p class="hero-lead">From two broadlooms to a complete in-house workshop today &mdash; every carpet is still shaped, tufted and finished entirely by hand.</p>
+        <div class="hero-cta">
+          <a href="#products" class="btn light">Explore Collections</a>
+          <a href="#craft" class="btn ghost">&#9656;&nbsp; See the Craft</a>
+        </div>
+        <div class="tagcard"><b>Hand Made</b><span>Artisans shaping every article by hand</span></div>
+      </div>
+      <div class="hero-ctrl">
+        <button id="hPrev" aria-label="Previous slide">&#8592;</button>
+        <span id="hNum">01 / 06</span>
+        <span class="hero-bar"><i id="hBar"></i></span>
+        <button id="hNext" aria-label="Next slide">&#8594;</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HISTORY RAIL ============ -->
+<section class="rail" aria-label="The history behind each article">
+  <div class="wrap"><span class="kicker">THE HISTORY BEHIND EACH ARTICLE</span></div>
+  <div class="rail-track"><figure class="hist"><div class="zoom"><img src="assets/hq/floral-blush-1000.webp" alt="" loading="lazy" draggable="false"></div><figcaption><h4>Handtufted Articles</h4><p>Rose to popularity in the 20th century as a faster alternative to hand-knotting.</p></figcaption></figure><figure class="hist"><div class="zoom"><img src="assets/hq/jacquard-1000.webp" alt="" loading="lazy" draggable="false"></div><figcaption><h4>Jacquard Articles</h4><p>Named after Joseph Marie Jacquard&#8217;s 1804 punch-card loom, which made intricate woven patterns repeatable.</p></figcaption></figure><figure class="hist"><div class="zoom"><img src="assets/hq/runner-1000.webp" alt="" loading="lazy" draggable="false"></div><figcaption><h4>Broadloom Articles</h4><p>Takes its name from the wide looms built to weave seamless, wall-to-wall carpet.</p></figcaption></figure><figure class="hist"><div class="zoom"><img src="assets/hq/braided-cord-1000.webp" alt="" loading="lazy" draggable="false"></div><figcaption><h4>Braided Articles</h4><p>Descends from early American folk craft &mdash; fabric strips braided and coiled into hardwearing mats.</p></figcaption></figure><figure class="hist"><div class="zoom"><img src="assets/hq/pitloom-1000.webp" alt="" loading="lazy" draggable="false"></div><figcaption><h4>Pitloom Articles</h4><p>Woven on a loom set into a pit and worked with the feet &mdash; a tradition centuries old in South Asia.</p></figcaption></figure><figure class="hist" aria-hidden="true"><div class="zoom"><img src="assets/hq/floral-blush-1000.webp" alt="" loading="lazy" draggable="false"></div><figcaption><h4>Handtufted Articles</h4><p>Rose to popularity in the 20th century as a faster alternative to hand-knotting.</p></figcaption></figure><figure class="hist" aria-hidden="true"><div class="zoom"><img src="assets/hq/jacquard-1000.webp" alt="" loading="lazy" draggable="false"></div><figcaption><h4>Jacquard Articles</h4><p>Named after Joseph Marie Jacquard&#8217;s 1804 punch-card loom, which made intricate woven patterns repeatable.</p></figcaption></figure><figure class="hist" aria-hidden="true"><div class="zoom"><img src="assets/hq/runner-1000.webp" alt="" loading="lazy" draggable="false"></div><figcaption><h4>Broadloom Articles</h4><p>Takes its name from the wide looms built to weave seamless, wall-to-wall carpet.</p></figcaption></figure><figure class="hist" aria-hidden="true"><div class="zoom"><img src="assets/hq/braided-cord-1000.webp" alt="" loading="lazy" draggable="false"></div><figcaption><h4>Braided Articles</h4><p>Descends from early American folk craft &mdash; fabric strips braided and coiled into hardwearing mats.</p></figcaption></figure><figure class="hist" aria-hidden="true"><div class="zoom"><img src="assets/hq/pitloom-1000.webp" alt="" loading="lazy" draggable="false"></div><figcaption><h4>Pitloom Articles</h4><p>Woven on a loom set into a pit and worked with the feet &mdash; a tradition centuries old in South Asia.</p></figcaption></figure></div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="sec wrap">
+  <div class="about">
+    <div class="zoom rv-img"><img src="assets/hq/floral-teal-2000.webp" srcset="assets/hq/floral-teal-1000.webp 1000w, assets/hq/floral-teal-2000.webp 2000w" sizes="(max-width:760px) 100vw, 50vw" alt="Our artisans with a freshly finished hand-tufted rug" loading="lazy"></div>
+    <div class="rv">
+      <span class="kicker">WELCOME TO ARUNA TEXTILE</span>
+      <h2 class="h-lg">Crafted with purpose, <em>woven for the world</em></h2>
+      <p class="lead">At Aruna Textile, we blend tradition, craftsmanship and innovation to create exceptional floor coverings that inspire spaces and enrich lives &mdash; every piece finished by hand at our own India workshop.</p>
+      <a href="#products" class="btn">Explore Our Collections</a>
+    </div>
+  </div>
+  <div class="values">
+    <div class="value rv"><img src="assets/hq/yarn-1000.webp" alt="Bundles of dyed yarn" loading="lazy"><div><h4>Premium Quality</h4><p>Best raw material, no compromise.</p></div></div>
+    <div class="value rv"><img src="assets/hq/samples-1000.webp" alt="Hand-tufted design samples" loading="lazy"><div><h4>Custom Designs</h4><p>Creative, unique work on request.</p></div></div>
+    <div class="value rv"><img src="assets/hq/charkha-1000.webp" alt="Artisan spinning on a charkha" loading="lazy"><div><h4>Sustainable Practices</h4><p>Responsible sourcing, honest process.</p></div></div>
+    <div class="value rv"><img src="assets/hq/dispatch-1000.webp" alt="Rugs loaded for export" loading="lazy"><div><h4>Global Reach</h4><p>Made in India, shipped worldwide.</p></div></div>
+  </div>
+</section>
+
+<!-- ============ ABOUT US: OUR JOURNEY ============ -->
+<section class="sec journey" id="about">
+  <div class="wrap journey-inner">
+    <div class="journey-top">
+      <span class="kicker">ABOUT US</span>
+      <h2 class="h-lg">Our <em>Journey</em></h2>
+      <p>Started in 2016 with 2 broadlooms, and have grown to 10 broadlooms to date. In 2018, we set up hand-tufting, and by 2021 we added our pitloom setup. Today, we run a complete in-house workshop, from start to finish.</p>
+    </div>
+    <figure class="charakha" aria-hidden="true">
+      <div class="charakha-glow"></div>
+      <div class="charakha-shadow"></div>
+      <img class="charakha-wheel" src="assets/hq/charakha-wheel.webp" alt="" draggable="false">
+      <svg class="charakha-band" viewBox="0 0 1470 978" preserveAspectRatio="none" focusable="false"><path d="M1260 557.25 L618.67 109.78 A362.5 362.5 0 0 1 621.58 702.3 L1148 640.28" fill="none" stroke="#B8A585" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".92"/></svg>
+      <img class="charakha-frame" src="assets/hq/charakha-frame.webp" alt="" draggable="false">
+    </figure>
+    <ol class="milestones" aria-label="Our journey milestones">
+      <li class="ms-track" aria-hidden="true"><span class="ms-fill"></span></li>
+      <li class="milestone" data-at="0.06"><span class="ms-dot" aria-hidden="true"></span><div class="ms-body"><span class="ms-year">2016</span><p>Started with 2 broadlooms.</p></div></li>
+      <li class="milestone" data-at="0.32"><span class="ms-dot" aria-hidden="true"></span><div class="ms-body"><span class="ms-year">2018</span><p>Hand-tufted set-up added.</p></div></li>
+      <li class="milestone" data-at="0.57"><span class="ms-dot" aria-hidden="true"></span><div class="ms-body"><span class="ms-year">2021</span><p>Pitloom set-up added.</p></div></li>
+      <li class="milestone" data-at="0.84"><span class="ms-dot" aria-hidden="true"></span><div class="ms-body"><span class="ms-year">Today</span><p>Complete in-house set-up.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ VISION & MISSION ============ -->
+<section class="sec wrap vm">
+  <div class="vm-card rv">
+    <img src="assets/hq/leaf-olive-2000.webp" srcset="assets/hq/leaf-olive-1000.webp 1000w, assets/hq/leaf-olive-2000.webp 2000w" sizes="(max-width:760px) 100vw, 50vw" alt="Hand-tufted leaf design in olive and ivory" loading="lazy">
+    <div class="vm-body on-dark">
+      <span class="vm-tag">Design-led</span>
+      <h3>Our Vision</h3>
+      <p>To establish our name through creative and unique designs &mdash; floor coverings that stand apart in every room they enter.</p>
+      <ul class="chips"><li>Original designs</li><li>Custom colourways</li><li>Made to order</li></ul>
+    </div>
+  </div>
+  <div class="vm-card rv">
+    <img src="assets/hq/rolls-2000.webp" srcset="assets/hq/rolls-1000.webp 1000w, assets/hq/rolls-2000.webp 2000w" sizes="(max-width:760px) 100vw, 50vw" alt="Finished rugs wrapped and ready for dispatch" loading="lazy">
+    <div class="vm-body on-dark">
+      <span class="vm-tag">Quality-first</span>
+      <h3>Our Mission</h3>
+      <p>A mission committed to supplying high-quality products, believing in business ethics and following environmental policies.</p>
+      <ul class="chips"><li>High-quality products</li><li>Ethical business</li><li>Environmental care</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATEMENT BANNER ============ -->
+<section class="sec banner">
+  <img src="assets/video/banner-pattern.jpg" alt="Hands guiding yarn over a patterned weave" loading="lazy">
+  <video class="loop" muted loop playsinline preload="none" poster="assets/video/banner-pattern.jpg" data-src="assets/video/banner-pattern.mp4" aria-hidden="true"></video>
+  <div class="banner-copy rv"><h3>EVERY PATTERN BEGINS WITH AN IDEA.</h3></div>
+</section>
+
+<!-- ============ HOW WE WORK ============ -->
+<section class="sec" id="craft">
+  <div class="wrap">
+    <div class="split-head rv">
+      <div><span class="kicker">HOW WE WORK</span><h2 class="h-lg">From raw yarn to finished carpet &mdash; <em>by hand</em></h2></div>
+      <div>
+        <p class="lead">Every Aruna Textile rug passes through the same human hands from start to finish. No two journeys look identical, but the steps stay the same.</p>
+        <div class="arrows" style="margin-top:20px"><button id="sPrev" aria-label="Previous">&#8592;</button><button id="sNext" aria-label="Next">&#8594;</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="strip-wrap">
+    <div class="strip" id="strip">
+      <figure class="step"><div class="zoom"><img src="assets/hq/yarn-1000.webp" alt="Bundles of dyed yarn" loading="lazy"></div><figcaption><b>01</b><span>The Material</span></figcaption></figure>
+      <figure class="step"><div class="zoom"><img src="assets/hq/warp-threads-1000.webp" alt="Setting the warp threads" loading="lazy"></div><figcaption><b>02</b><span>The Warp</span></figcaption></figure>
+      <figure class="step"><div class="zoom"><img src="assets/hq/tufting-1000.webp" alt="Artisan hand-tufting a design" loading="lazy"></div><figcaption><b>03</b><span>The Artisan&#8217;s Hand</span></figcaption></figure>
+      <figure class="step"><div class="zoom"><img src="assets/hq/weaver-1000.webp" alt="Weaver at the loom" loading="lazy"></div><figcaption><b>04</b><span>The Weave</span></figcaption></figure>
+      <figure class="step"><div class="zoom"><img src="assets/hq/trim-red-1000.webp" alt="Trimming a rug by hand" loading="lazy"></div><figcaption><b>05</b><span>The Finish</span></figcaption></figure>
+      <figure class="step"><div class="zoom"><img src="assets/hq/sunburst-top-1000.webp" alt="A finished round sunburst rug" loading="lazy"></div><figcaption><b>06</b><span>The Finished Piece</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TECHNIQUES ============ -->
+<section class="sec wrap" id="products">
+  <div class="head rv">
+    <div><span class="kicker">OUR TECHNIQUES</span><h2 class="h-lg">Woven &amp; Shaped <em>By Hand</em></h2></div>
+    <a href="https://claude.ai/artifact/PumdhbL2gvogEjry8eSRF9" class="link">View All Products</a>
+  </div>
+  <div class="tiles">
+    <a class="tile rv" href="https://claude.ai/artifact/PumdhbL2gvogEjry8eSRF9#cat=Handtufted">
+      <img class="a" src="assets/hq/floral-blush-1000.webp" alt="Handtufted rug" loading="lazy">
+      <img class="b" src="assets/hq/tufting-1000.webp" alt="" loading="lazy">
+      <div class="tile-cap"><small>01</small><h3>Handtufted</h3><p>A tufting gun pushes yarn through a stretched backing, tuft by tuft, by hand.</p></div>
+    </a>
+    <a class="tile rv" href="https://claude.ai/artifact/PumdhbL2gvogEjry8eSRF9#cat=Pitloom">
+      <img class="a" src="assets/hq/flatweave-rust-1000.webp" alt="Pitloom rug" loading="lazy">
+      <img class="b" src="assets/hq/pitloom-1000.webp" alt="" loading="lazy">
+      <div class="tile-cap"><small>02</small><h3>Pitloom</h3><p>Flatwoven by hand on a traditional pit loom, thread by thread.</p></div>
+    </a>
+    <a class="tile rv" href="https://claude.ai/artifact/PumdhbL2gvogEjry8eSRF9#cat=Braided">
+      <img class="a" src="assets/hq/jute-braid-1000.webp" alt="Braided rug" loading="lazy">
+      <img class="b" src="assets/hq/braided-1000.webp" alt="" loading="lazy">
+      <div class="tile-cap"><small>03</small><h3>Braided</h3><p>Cord is braided, then hand-coiled and stitched into shape.</p></div>
+    </a>
+    <a class="tile rv" href="https://claude.ai/artifact/PumdhbL2gvogEjry8eSRF9#cat=Broadloom">
+      <img class="a" src="assets/hq/runner-1000.webp" alt="Broadloom rug" loading="lazy">
+      <img class="b" src="assets/hq/broadloom-1000.webp" alt="" loading="lazy">
+      <div class="tile-cap"><small>04</small><h3>Broadloom</h3><p>Woven wall-to-wall, then trimmed and bound by hand.</p></div>
+    </a>
+    <a class="tile rv" href="https://claude.ai/artifact/PumdhbL2gvogEjry8eSRF9#cat=Jacquard">
+      <img class="a" src="assets/hq/jacquard-1000.webp" alt="Jacquard rug" loading="lazy">
+      <img class="b" src="assets/hq/jacquard-close-1000.webp" alt="" loading="lazy">
+      <div class="tile-cap"><small>05</small><h3>Jacquard</h3><p>Patterned on the loom, hand-finished with fringe and binding.</p></div>
+    </a>
+  </div>
+  <div class="bento" style="margin-top:var(--gap)">
+    <figure class="a zoom rv-img"><img src="assets/hq/living-2000.webp" srcset="assets/hq/living-1000.webp 1000w, assets/hq/living-2000.webp 2000w" sizes="(max-width:760px) 100vw, 55vw" alt="Geometric hand-tufted rug in a living room" loading="lazy"></figure>
+    <div class="b quote rv">
+      <blockquote>&#8220;Exceptional rugs, shaped entirely by hand.&#8221;</blockquote>
+      <p>From timeless classics to contemporary designs, every rug passes through an artisan&#8217;s hands before it reaches your floor &mdash; browse the full range in our shop.</p>
+      <a href="https://claude.ai/artifact/PumdhbL2gvogEjry8eSRF9" class="link">Shop the range</a>
+    </div>
+    <figure class="c zoom rv-img"><img src="assets/hq/coral-fold-1000.webp" alt="Coral rug folded to show its finished backing" loading="lazy"></figure>
+    <figure class="d zoom rv-img"><img src="assets/hq/sunburst-2000.webp" srcset="assets/hq/sunburst-1000.webp 1000w, assets/hq/sunburst-2000.webp 2000w" sizes="(max-width:760px) 100vw, 45vw" alt="Artisan finishing a round sunburst rug" loading="lazy"></figure>
+  </div>
+</section>
+
+<!-- ============ STATEMENT BANNER ============ -->
+<section class="sec banner">
+  <img src="assets/video/banner-crafted.jpg" alt="Cord being stitched into a rug by hand" loading="lazy">
+  <video class="loop" muted loop playsinline preload="none" poster="assets/video/banner-crafted.jpg" data-src="assets/video/banner-crafted.mp4" aria-hidden="true"></video>
+  <div class="banner-copy rv"><h3>CRAFTED BY HAND. DESIGNED TO LAST.</h3></div>
+</section>
+
+<!-- ============ TEAM ============ -->
+<section class="sec team">
+  <img src="assets/hq/loom-pair-2000.webp" srcset="assets/hq/loom-pair-1000.webp 1000w, assets/hq/loom-pair-2000.webp 2000w" sizes="100vw" alt="Two of our weavers working together at the loom" loading="lazy">
+  <div class="wrap on-dark rv">
+    <span class="kicker">OUR PEOPLE</span>
+    <h2>A team that <em>weaves together</em></h2>
+    <p class="lead">With a strength of 33 folks and increasing, we are always thriving to deliver our best &mdash; every article passes through hands that know the craft.</p>
+    <a href="#contact" class="btn ghost">Get in Touch</a>
+  </div>
+</section>
+
+<!-- ============ INFRASTRUCTURE ============ -->
+<section class="sec wrap heritage" id="infrastructure">
+  <div class="zoom rv-img"><img src="assets/hq/workshop-floor-2000.webp" srcset="assets/hq/workshop-floor-1000.webp 1000w, assets/hq/workshop-floor-2000.webp 2000w" sizes="(max-width:980px) 100vw, 55vw" alt="Artisans at work across our 19,000 sq ft workshop floor" loading="lazy"></div>
+  <div class="rv">
+    <span class="kicker">INFRASTRUCTURE</span>
+    <h2 class="h-lg">19,000 sq.ft, <em>complete in-house</em></h2>
+    <p class="lead">With 19,000 sq.ft of working space, we run a fully in-house set-up &mdash; from raw yarn to finished, packed carpet &mdash; under one roof in India.</p>
+    <div class="stat-row">
+      <div class="stat-big"><b data-count="19000">19,000</b><span>Sq.ft working space</span></div>
+      <div class="mini"><i>&#8987;</i>In-house Production</div>
+      <div class="mini"><i>&#10022;</i>Hand-Finished Detailing</div>
+      <div class="mini"><i>&#10003;</i>Quality Control</div>
+      <div class="mini"><i>&#9679;</i>33+ Skilled Artisans</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSIDE THE WORKSHOP ============ -->
+<section class="sec wrap" id="workshop">
+  <div class="split-head rv">
+    <div><span class="kicker">INSIDE THE WORKSHOP</span><h2 class="h-lg">The craft, <em>in motion</em></h2></div>
+    <p class="lead">Short clips from our own floor in India &mdash; the same hands, looms and tools behind every article we ship.</p>
+  </div>
+  <div class="reels">
+    <button class="reel rv" data-video="assets/video/reel-tufting.mp4" aria-label="Play video: Hand-Tufting"><video class="loop" muted loop playsinline preload="none" poster="assets/video/reel-tufting.jpg" data-src="assets/video/reel-tufting.mp4" aria-hidden="true"></video><i>&#9654;</i><div class="rc"><small>01</small><b>Hand-Tufting</b><span>The design is filled in on an upright frame, one tuft at a time.</span></div></button>
+    <button class="reel rv" data-video="assets/video/reel-outline.mp4" aria-label="Play video: Tracing the Outline"><video class="loop" muted loop playsinline preload="none" poster="assets/video/reel-outline.jpg" data-src="assets/video/reel-outline.mp4" aria-hidden="true"></video><i>&#9654;</i><div class="rc"><small>02</small><b>Tracing the Outline</b><span>The tufting gun follows the drawn pattern before the fill begins.</span></div></button>
+    <button class="reel rv" data-video="assets/video/reel-weaving.mp4" aria-label="Play video: Weaving"><video class="loop" muted loop playsinline preload="none" poster="assets/video/reel-weaving.jpg" data-src="assets/video/reel-weaving.mp4" aria-hidden="true"></video><i>&#9654;</i><div class="rc"><small>03</small><b>Weaving</b><span>Pattern rows build up on the loom, thread by thread.</span></div></button>
+    <button class="reel rv" data-video="assets/video/reel-stitching.mp4" aria-label="Play video: Cord Stitching"><video class="loop" muted loop playsinline preload="none" poster="assets/video/reel-stitching.jpg" data-src="assets/video/reel-stitching.mp4" aria-hidden="true"></video><i>&#9654;</i><div class="rc"><small>04</small><b>Cord Stitching</b><span>Cord is guided under the needle and stitched into place by hand.</span></div></button>
+    <button class="reel rv" data-video="assets/video/reel-threading.mp4" aria-label="Play video: Threading the Stitcher"><video class="loop" muted loop playsinline preload="none" poster="assets/video/reel-threading.jpg" data-src="assets/video/reel-threading.mp4" aria-hidden="true"></video><i>&#9654;</i><div class="rc"><small>05</small><b>Threading the Stitcher</b><span>Each colour is threaded and tensioned by hand before stitching.</span></div></button>
+    <button class="reel rv" data-video="assets/video/reel-shaping.mp4" aria-label="Play video: Shaping by Hand"><video class="loop" muted loop playsinline preload="none" poster="assets/video/reel-shaping.jpg" data-src="assets/video/reel-shaping.mp4" aria-hidden="true"></video><i>&#9654;</i><div class="rc"><small>06</small><b>Shaping by Hand</b><span>The rug is turned and fed through with both hands to keep every line true.</span></div></button>
+    <button class="reel rv" data-video="assets/video/reel-finishing.mp4" aria-label="Play video: Surface Finishing"><video class="loop" muted loop playsinline preload="none" poster="assets/video/reel-finishing.jpg" data-src="assets/video/reel-finishing.mp4" aria-hidden="true"></video><i>&#9654;</i><div class="rc"><small>07</small><b>Surface Finishing</b><span>Loose fibres are singed away by hand for a clean, crisp surface.</span></div></button>
+    <button class="reel rv" data-video="assets/video/reel-singeing.mp4" aria-label="Play video: Sweep &amp; Finish"><video class="loop" muted loop playsinline preload="none" poster="assets/video/reel-singeing.jpg" data-src="assets/video/reel-singeing.mp4" aria-hidden="true"></video><i>&#9654;</i><div class="rc"><small>08</small><b>Sweep &amp; Finish</b><span>The surface is swept and given a final pass before the rug is rolled.</span></div></button>
+  </div>
+</section>
+
+<!-- ============ COMMITMENT ============ -->
+<section class="sec commit">
+  <img src="assets/hq/dispatch-2000.webp" srcset="assets/hq/dispatch-1000.webp 1000w, assets/hq/dispatch-2000.webp 2000w" sizes="100vw" alt="" loading="lazy">
+  <div class="wrap on-dark">
+    <div class="rv">
+      <span class="kicker">OUR COMMITMENT</span>
+      <h2 class="h-lg">No compromise <em>on anything</em></h2>
+      <p class="lead">The principles that guide every article that leaves our workshop, from the first thread to the final finish.</p>
+    </div>
+    <ol class="commit-list rv">
+      <li><b>01</b>To provide the best quality product with efficient costing.</li>
+      <li><b>02</b>Meeting timely delivery, every time.</li>
+      <li><b>03</b>Ensuring the use of the best raw material.</li>
+      <li><b>04</b>Working to client policies with total sincerity and honesty.</li>
+      <li><b>05</b>And lastly, no compromise on anything.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section class="sec wrap" id="gallery">
+  <div class="head rv">
+    <div><span class="kicker">GALLERY</span><h2 class="h-lg">From loom <em>to living room</em></h2></div>
+    <a href="https://claude.ai/artifact/PumdhbL2gvogEjry8eSRF9" class="link">Shop the Collection</a>
+  </div>
+  <div class="masonry" id="masonry">
+    <button data-full="assets/hq/coral-fold-2000.webp"><img src="assets/hq/coral-fold-1000.webp" alt="Coral rug folded to show its backing" loading="lazy"></button>
+    <button data-full="assets/hq/leaf-olive-2000.webp"><img src="assets/hq/leaf-olive-1000.webp" alt="Leaf pattern in olive and ivory" loading="lazy"></button>
+    <button data-full="assets/hq/sunburst-2000.webp"><img src="assets/hq/sunburst-1000.webp" alt="Finishing a sunburst rug" loading="lazy"></button>
+    <button data-full="assets/hq/jacquard-2000.webp"><img src="assets/hq/jacquard-1000.webp" alt="Jacquard rug" loading="lazy"></button>
+    <button data-full="assets/hq/floral-teal-2000.webp"><img src="assets/hq/floral-teal-1000.webp" alt="Teal floral rug" loading="lazy"></button>
+    <button data-full="assets/hq/jute-weave-2000.webp"><img src="assets/hq/jute-weave-1000.webp" alt="Natural jute weave and fringe" loading="lazy"></button>
+    <button data-full="assets/hq/warping-2000.webp"><img src="assets/hq/warping-1000.webp" alt="Warping drum" loading="lazy"></button>
+    <button data-full="assets/hq/samples-2000.webp"><img src="assets/hq/samples-1000.webp" alt="Design samples" loading="lazy"></button>
+    <button data-full="assets/hq/coral-2000.webp"><img src="assets/hq/coral-1000.webp" alt="Coral hand-tufted rug" loading="lazy"></button>
+    <button data-full="assets/hq/flatweave-rust-2000.webp"><img src="assets/hq/flatweave-rust-1000.webp" alt="Rust flatweave" loading="lazy"></button>
+    <button data-full="assets/hq/braided-2000.webp"><img src="assets/hq/braided-1000.webp" alt="Braided diamond-pattern rug" loading="lazy"></button>
+    <button data-full="assets/hq/runner-2000.webp"><img src="assets/hq/runner-1000.webp" alt="Runner stretched for finishing" loading="lazy"></button>
+    <button data-full="assets/hq/rolled-2000.webp"><img src="assets/hq/rolled-1000.webp" alt="Rugs rolled for packing" loading="lazy"></button>
+    <button data-full="assets/hq/workshop-floor-2000.webp"><img src="assets/hq/workshop-floor-1000.webp" alt="Workshop floor" loading="lazy"></button>
+    <button data-full="assets/hq/dispatch-2000.webp"><img src="assets/hq/dispatch-1000.webp" alt="Rugs loaded for export" loading="lazy"></button>
+  </div>
+</section>
+
+<!-- ============ STATEMENT BANNER ============ -->
+<section class="sec banner">
+  <img src="assets/hq/packing-2000.webp" srcset="assets/hq/packing-1000.webp 1000w, assets/hq/packing-2000.webp 2000w" sizes="100vw" alt="Finished rugs being rolled and packed for dispatch" loading="lazy">
+  <div class="banner-copy rv"><h3>FROM THE ARTISAN&#8217;S HAND TO YOUR SPACE.</h3></div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <img src="assets/hq/rolled-2000.webp" srcset="assets/hq/rolled-1000.webp 1000w, assets/hq/rolled-2000.webp 2000w" sizes="100vw" alt="Finished rugs rolled and ready" loading="lazy">
+  <div class="wrap rv">
+    <span class="kicker" style="color:var(--brass)">YOU CAN FIND US</span>
+    <h2>Let&#8217;s weave <em>something</em> together</h2>
+    <div class="contact-row">
+      <div>
+        <p class="lead">Whether you&#8217;re sourcing for a home, a hospitality project or a retail floor &mdash; our team is ready to talk sizes, colourways and lead times.</p>
+        <div class="contact-cta" style="margin-top:24px"><a href="https://claude.ai/artifact/PumdhbL2gvogEjry8eSRF9" class="btn light">Browse the Shop</a></div>
+      </div>
+      <div class="find">
+        <div><h5>ONLINE</h5><p>Reach us through our socials, or browse the full catalogue in our shop.</p>
+          <div class="socials"><a href="#" aria-label="WhatsApp"><svg class="si" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35m-5.42 7.4h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88a9.82 9.82 0 0 1 6.99 2.9 9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89a11.82 11.82 0 0 0-3.48-8.41Z"/></svg></a><a href="#" aria-label="Instagram"><svg class="si" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r=".6" fill="currentColor" stroke="none"/></svg></a><a href="#" aria-label="Facebook"><svg class="si" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M13.5 22v-8.2h2.8l.42-3.2H13.5V8.56c0-.93.26-1.56 1.6-1.56h1.7V4.14A22.7 22.7 0 0 0 14.32 4C11.86 4 10.2 5.5 10.2 8.24v2.36H7.4v3.2h2.8V22h3.3Z"/></svg></a><a href="#" aria-label="Email"><svg class="si" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></a></div></div>
+        <div><h5>OFFLINE</h5><p>Aruna Textile, Near Jain Jutta Factory,<br>Tej Vihar Colony, Babail Road,<br>India (HR) 132103, India</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <div class="brand"><b>ARUNA TEXTILE</b><small>WOVEN IN INDIA</small></div>
+        <p>Handwoven rugs and carpets, crafted with skill &mdash; from broadloom to jacquard, every article finished entirely by hand.</p>
+        <div class="socials"><a href="#" aria-label="WhatsApp"><svg class="si" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35m-5.42 7.4h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88a9.82 9.82 0 0 1 6.99 2.9 9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89a11.82 11.82 0 0 0-3.48-8.41Z"/></svg></a><a href="#" aria-label="Instagram"><svg class="si" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r=".6" fill="currentColor" stroke="none"/></svg></a><a href="#" aria-label="Facebook"><svg class="si" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M13.5 22v-8.2h2.8l.42-3.2H13.5V8.56c0-.93.26-1.56 1.6-1.56h1.7V4.14A22.7 22.7 0 0 0 14.32 4C11.86 4 10.2 5.5 10.2 8.24v2.36H7.4v3.2h2.8V22h3.3Z"/></svg></a><a href="#" aria-label="Email"><svg class="si" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></a></div>
+      </div>
+      <div><h5>EXPLORE</h5><a href="#about">About</a><a href="#craft">Our Craft</a><a href="#products">Techniques</a><a href="#infrastructure">Infrastructure</a><a href="#contact">Contact</a></div>
+      <div><h5>SHOP</h5><a href="https://claude.ai/artifact/PumdhbL2gvogEjry8eSRF9">All Collections</a><a href="https://claude.ai/artifact/PumdhbL2gvogEjry8eSRF9#cat=Jacquard">Jacquard Carpets</a><a href="https://claude.ai/artifact/PumdhbL2gvogEjry8eSRF9#cat=Handtufted">Handtufted Articles</a></div>
+      <div><h5>VISIT</h5><a href="#contact">Near Jain Jutta Factory</a><a href="#contact">Tej Vihar Colony, Babail Road</a><a href="#contact">India (HR) 132103, India</a></div>
+    </div>
+    <div class="foot-bottom"><span>&copy; 2026 Aruna Textile. Design mockup for review.</span><span>Tradition &times; Innovation &times; Sustainability</span></div>
+  </div>
+</footer>
+
+<!-- Social contact widget — replace href="#" with Aruna Textile's real WhatsApp (wa.me/<number>), Instagram, Facebook and mailto: links -->
+<div class="float">
+  <a class="wa" href="#" aria-label="Chat on WhatsApp"><svg class="si" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35m-5.42 7.4h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88a9.82 9.82 0 0 1 6.99 2.9 9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89a11.82 11.82 0 0 0-3.48-8.41Z"/></svg></a>
+  <a href="#" aria-label="Instagram"><svg class="si" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r=".6" fill="currentColor" stroke="none"/></svg></a>
+  <a href="#" aria-label="Facebook"><svg class="si" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M13.5 22v-8.2h2.8l.42-3.2H13.5V8.56c0-.93.26-1.56 1.6-1.56h1.7V4.14A22.7 22.7 0 0 0 14.32 4C11.86 4 10.2 5.5 10.2 8.24v2.36H7.4v3.2h2.8V22h3.3Z"/></svg></a>
+  <a href="#" aria-label="Email us"><svg class="si" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></a>
+</div>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="x" id="lbX" aria-label="Close">&#10005;</button>
+  <button class="pv" id="lbP" aria-label="Previous">&#8592;</button>
+  <img id="lbImg" alt="">
+  <video id="lbVid" controls playsinline></video>
+  <button class="nx" id="lbN" aria-label="Next">&#8594;</button>
+  <div class="lb-count" id="lbC"></div>
+</div>
+
+<script>
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* nav */
+  const nav = document.getElementById('nav');
+  const navSync = () => nav.classList.toggle('solid', scrollY > 60);
+  addEventListener('scroll', navSync, {passive:true}); navSync();
+  const mm = document.getElementById('mmenu');
+  document.getElementById('burger').onclick = () => mm.classList.add('open');
+  document.getElementById('mclose').onclick = () => mm.classList.remove('open');
+  mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mm.classList.remove('open')));
+
+  /* hero crossfade */
+  document.querySelectorAll('.hero .slide img').forEach(im => im.addEventListener('error', () => { const sl = im.closest('.slide'); if(sl && !sl.classList.contains('on')) sl.remove(); }));
+  let slides = () => [...document.querySelectorAll('.hero .slide')];
+  const num = document.getElementById('hNum'), bar = document.getElementById('hBar');
+  let i = 0, timer;
+  function show(n){
+    const S = slides();
+    S.forEach(x => x.classList.remove('on'));
+    i = (n + S.length) % S.length;
+    S[i].classList.add('on');
+    if(S[i+1]){ const nx = S[i+1].querySelector('img'); if(nx) nx.loading = 'eager'; }
+    num.textContent = String(i+1).padStart(2,'0') + ' / ' + String(S.length).padStart(2,'0');
+    bar.classList.remove('run'); void bar.offsetWidth; if(!reduce) bar.classList.add('run');
+    clearTimeout(timer); if(!reduce) timer = setTimeout(() => show(i+1), 6000);
+  }
+  document.getElementById('hNext').onclick = () => show(i+1);
+  document.getElementById('hPrev').onclick = () => show(i-1);
+  show(0);
+
+  /* reveals */
+  const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), {rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.rv,.rv-img').forEach(el => io.observe(el));
+
+  /* count-up */
+  const cio = new IntersectionObserver(es => es.forEach(e => {
+    if(!e.isIntersecting) return; cio.unobserve(e.target);
+    const el = e.target, to = +el.dataset.count, suf = el.dataset.suffix || '';
+    if(reduce) return;
+    const t0 = performance.now(), d = 1600;
+    (function tick(t){ const p = Math.min((t - t0)/d, 1), v = Math.round(to * (1 - Math.pow(1-p, 3)));
+      el.textContent = v.toLocaleString('en-IN') + suf; if(p < 1) requestAnimationFrame(tick); })(t0);
+  }), {threshold:.6});
+  document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
+
+  /* process strip: arrows + drag */
+  const strip = document.getElementById('strip');
+  const stepW = () => strip.querySelector('.step').offsetWidth + 14;
+  document.getElementById('sNext').onclick = () => strip.scrollBy({left: stepW(), behavior:'smooth'});
+  document.getElementById('sPrev').onclick = () => strip.scrollBy({left: -stepW(), behavior:'smooth'});
+  let down = false, sx = 0, sl = 0;
+  strip.addEventListener('pointerdown', e => { if(e.pointerType !== 'mouse') return; down = true; sx = e.clientX; sl = strip.scrollLeft; strip.classList.add('drag'); });
+  addEventListener('pointermove', e => { if(down) strip.scrollLeft = sl - (e.clientX - sx); });
+  addEventListener('pointerup', () => { if(down){ down = false; strip.classList.remove('drag'); } });
+
+  /* muted loops: load + play only when visible */
+  const vids = [...document.querySelectorAll('video.loop')];
+  if(!reduce && 'IntersectionObserver' in window){
+    const vio = new IntersectionObserver(es => es.forEach(e => {
+      const v = e.target;
+      if(e.isIntersecting){ if(!v.getAttribute('src')) v.src = v.dataset.src; const p = v.play(); if(p) p.catch(()=>{}); }
+      else if(!v.paused) v.pause();
+    }), {rootMargin:'200px 0px'});
+    vids.forEach(v => vio.observe(v));
+  }
+
+  /* lightbox */
+  const lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'), lbVid = document.getElementById('lbVid'), lbC = document.getElementById('lbC');
+  const pics = [...document.querySelectorAll('#masonry button')];
+  let k = 0;
+  function openPic(n){ k = (n + pics.length) % pics.length; lb.classList.remove('vid'); lbImg.src = pics[k].dataset.full; lbImg.alt = pics[k].querySelector('img').alt; lbC.textContent = (k+1) + ' / ' + pics.length; lb.classList.add('on'); }
+  pics.forEach((b, n) => b.addEventListener('click', () => openPic(n)));
+  document.querySelectorAll('.reel').forEach(r => r.addEventListener('click', () => { lbVid.src = r.dataset.video; lbC.textContent = ''; lb.classList.add('vid','on'); const p = lbVid.play(); if(p) p.catch(()=>{}); }));
+  function close(){ lb.classList.remove('on'); lbVid.pause(); }
+  document.getElementById('lbX').onclick = close;
+  document.getElementById('lbP').onclick = () => openPic(k-1);
+  document.getElementById('lbN').onclick = () => openPic(k+1);
+  lb.addEventListener('click', e => { if(e.target === lb) close(); });
+  addEventListener('keydown', e => {
+    if(!lb.classList.contains('on')) return;
+    if(e.key === 'Escape') close();
+    if(!lb.classList.contains('vid')){ if(e.key === 'ArrowRight') openPic(k+1); if(e.key === 'ArrowLeft') openPic(k-1); }
+  });
+})();
+
+if(window.gsap && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+/* ---------------- OUR JOURNEY: the Charakha turns with scroll and reveals each chapter ---------------- */
+(function(){
+  const sec = document.getElementById('about');
+  if(!sec) return;
+  const wheel = sec.querySelector('.charakha-wheel');
+  const figure = sec.querySelector('.charakha');
+  const list = sec.querySelector('.milestones');
+  const items = [...list.querySelectorAll('.milestone')];
+  const stops = items.map(el => parseFloat(el.dataset.at));   // progress point where each chapter appears
+  const TURNS = 2;                                              // two full revolutions across the story
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let marks = [], axis = 'y', lastP = -1;
+
+  function measure(){
+    axis = getComputedStyle(list).getPropertyValue('--axis').trim() || 'y';
+    marks = items.map(el => {
+      const d = el.querySelector('.ms-dot');
+      return axis === 'x' ? el.offsetLeft + d.offsetLeft + d.offsetWidth/2 : el.offsetTop + d.offsetTop + d.offsetHeight/2;
+    });
+    if(axis !== 'none'){
+      list.style.setProperty('--t0', marks[0] + 'px');
+      list.style.setProperty('--tlen', (marks[marks.length-1] - marks[0]) + 'px');
+    }
+    lastP = -1;
+  }
+
+  function render(p){
+    if(Math.abs(p - lastP) < 0.0004) return;
+    lastP = p;
+    wheel.style.setProperty('--rotation', (p * 360 * TURNS).toFixed(2) + 'deg');
+    let cur = -1;
+    for(let i = 0; i < stops.length; i++){ if(p >= stops[i]) cur = i; }
+    items.forEach((el, i) => {
+      el.classList.toggle('is-on', i <= cur);
+      el.classList.toggle('is-current', i === cur);
+    });
+    // the thread reaches each dot exactly when that chapter is revealed
+    let f = 0;
+    const span = (marks[marks.length-1] - marks[0]) || 1;
+    if(p >= stops[stops.length-1]) f = 1;
+    else if(p > stops[0]){
+      for(let i = 0; i < stops.length-1; i++){
+        if(p < stops[i+1]){
+          const k = (p - stops[i]) / (stops[i+1] - stops[i]);
+          f = ((marks[i] - marks[0]) + k * (marks[i+1] - marks[i])) / span;
+          break;
+        }
+      }
+    }
+    list.style.setProperty('--tp', f.toFixed(4));
+  }
+
+  measure();
+  if(reduce || !window.gsap || !window.ScrollTrigger){ render(1); return; }
+  render(0);
+
+  const state = { p: 0 };
+  let tween = null, builtWidth = 0;
+  const floatBtns = document.querySelector('.social-float');   // kept clear of the milestones while the story is held on phones
+
+  function build(){
+    if(tween){ tween.scrollTrigger.kill(true); tween.kill(); tween = null; }
+    measure();
+    const navH = window.innerWidth <= 560 ? 58 : 68;               // height of the compact (scrolled) nav
+    const room = window.innerHeight - navH - 12;
+    sec.style.minHeight = '';
+    const h = sec.offsetHeight;
+    const stageTop = Math.min(figure.offsetTop, list.offsetTop);   // where the animated part starts
+    const stageH = h - stageTop;
+    let st;
+    if(h <= room){
+      // whole panel fits: while it is held, the dark stage fills the screen under the nav (no blank page around it)
+      sec.style.minHeight = room + 'px';
+      st = { start: 'top ' + (navH + 6) + 'px', pin: true };
+    } else if(stageH <= room){
+      // taller than the screen (phones): hold it with the wheel + milestones in view
+      st = { start: 'bottom bottom-=12', pin: true };
+    } else {
+      // very short screens (landscape phones): no pin, the wheel simply turns as the section passes
+      st = { start: 'top 75%', end: 'bottom 35%', pin: false };
+    }
+    const dist = Math.round(window.innerHeight * (window.innerWidth < 700 ? 1.15 : 1.4));
+    tween = gsap.to(state, {
+      p: 1, ease: 'none',
+      onUpdate: () => render(state.p),
+      scrollTrigger: {
+        trigger: sec,
+        start: st.start,
+        end: st.end || ('+=' + dist),
+        pin: st.pin,
+        pinSpacing: true,
+        anticipatePin: 1,
+        scrub: 0.9,           // eased catch-up so the wheel feels weighted, never jerky
+        onToggle: self => { if(floatBtns) floatBtns.classList.toggle('in-story', self.isActive); }
+      }
+    });
+    builtWidth = window.innerWidth;
+    ScrollTrigger.refresh();
+  }
+
+  build();
+  let t;
+  window.addEventListener('resize', () => {
+    clearTimeout(t);
+    t = setTimeout(() => { if(window.innerWidth !== builtWidth) build(); else measure(); }, 200);
+  });
+  window.addEventListener('load', () => { measure(); ScrollTrigger.refresh(); });
+})();
+</script>
+</body>
+</html>
