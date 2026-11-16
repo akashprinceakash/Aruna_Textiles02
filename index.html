@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="https://images.unsplash.com/photo-1534889156217-d643df14f14a?auto=format&fit=crop&q=80&w=2400" imagesrcset="https://images.unsplash.com/photo-1534889156217-d643df14f14a?auto=format&fit=crop&q=80&w=1200 1200w, https://images.unsplash.com/photo-1534889156217-d643df14f14a?auto=format&fit=crop&q=80&w=2400 2400w" imagesizes="100vw" referrerpolicy="no-referrer">
+<link rel="preload" as="image" href="assets/hq/burgundy-living-1774.webp" imagesrcset="assets/hq/burgundy-living-1000.webp 1000w, assets/hq/burgundy-living-1774.webp 1774w" imagesizes="100vw">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
@@ -1184,6 +1184,40 @@ body::after{content:'';position:fixed;inset:0;z-index:90;pointer-events:none;bac
   .cz-actions .btn{font-size:11px;letter-spacing:.12em;padding:0 10px}
 }
 @media (prefers-reduced-motion:reduce){.cz[open],.cz::backdrop,.cz-art img{animation:none}}
+/* smaller floating social icons (2026-11-16) */
+.float{gap:8px;right:16px;bottom:16px}
+.float a,.float a.wa{width:36px;height:36px;box-shadow:0 10px 22px -12px rgba(0,0,0,.45)}
+.float .si{width:15px;height:15px}
+/* gallery: slightly smaller cards + continuous glide (2026-11-16) */
+.car-slide{flex-basis:clamp(205px,21vw,320px)}
+.car-track.glide{scroll-snap-type:none}
+@media(max-width:760px){.car-slide{flex-basis:60vw}}
+/* contact: carpet photo banner (2026-11-16) */
+.contact-hero{position:relative;overflow:hidden;isolation:isolate;padding:clamp(96px,14vw,180px) 0!important;color:#fff;background:#1b120d}
+.contact-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 55%;z-index:-2}
+.contact-hero::after{content:'';position:absolute;inset:0;z-index:-1;background:
+  radial-gradient(ellipse 70% 75% at 50% 50%,rgba(15,10,7,.55) 0%,rgba(15,10,7,.62) 55%,rgba(15,10,7,.82) 100%)}
+.contact-hero .kicker{color:#E8C98A}
+.contact-hero .h-lg{color:#fff;text-shadow:0 2px 30px rgba(0,0,0,.35)}
+.contact-hero .lead{color:rgba(255,255,255,.86);max-width:62ch}
+.contact-hero .contact2-cta .btn{background:#fff;color:var(--ink);border-color:#fff}
+.contact-hero .contact2-cta .btn:hover{background:var(--rust);border-color:var(--rust);color:#fff}
+.contact-hero .contact2-cta .btn.ghost-dark{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.7)}
+.contact-hero .contact2-cta .btn.ghost-dark:hover{background:#fff;color:var(--ink);border-color:#fff}
+.contact-hero .socials a{border-color:rgba(255,255,255,.4);color:#fff}
+.contact-hero .socials a:hover{background:#fff;border-color:#fff;color:var(--ink)}
+@media(max-width:760px){.contact-hero{padding:88px 0!important}.contact-bg{object-position:70% 50%}}
+/* tighter section rhythm (2026-11-16) */
+:root{--sec:clamp(40px,4.2vw,64px)}
+.shead{margin-bottom:clamp(18px,2vw,30px)}
+.center-cta{margin-top:clamp(18px,2vw,28px)}
+.contact-hero{padding:clamp(72px,10vw,128px) 0!important}
+footer{margin-top:0}
+@media(max-width:760px){
+  :root{--sec:clamp(30px,8vw,40px)}
+  .band{padding:32px 0}
+  .contact-hero{padding:64px 0!important}
+}
 </style>
 </head>
 <body>
@@ -1221,6 +1255,9 @@ body::after{content:'';position:fixed;inset:0;z-index:90;pointer-events:none;bac
 <header class="hero" id="home">
   <div class="slide on"><img src="assets/hq/burgundy-living-1774.webp" srcset="assets/hq/burgundy-living-1000.webp 1000w, assets/hq/burgundy-living-1774.webp 1774w" sizes="100vw" alt="Burgundy Persian rug in a sunlit living room" style="object-position:58% 70%" fetchpriority="high"></div>
   <div class="slide"><img src="assets/hq/maroon-still-1774.webp" srcset="assets/hq/maroon-still-1000.webp 1000w, assets/hq/maroon-still-1774.webp 1774w" sizes="100vw" alt="Maroon Persian rug with fringed border and brass vessels" style="object-position:62% 60%"></div>
+  <div class="slide"><img src="assets/hq/coral-living-1774.webp" srcset="assets/hq/coral-living-1000.webp 1000w, assets/hq/coral-living-1774.webp 1774w" sizes="100vw" alt="Coral hand-tufted rug in a sunlit living room" style="object-position:52% 72%"></div>
+  <div class="slide"><img src="assets/hq/geometric-living-1672.webp" srcset="assets/hq/geometric-living-1000.webp 1000w, assets/hq/geometric-living-1672.webp 1672w" sizes="100vw" alt="Geometric rug in rust, mustard and navy in a warm living room" style="object-position:48% 72%"></div>
+  <div class="slide"><img src="assets/hq/kerala-veranda-1774.webp" srcset="assets/hq/kerala-veranda-1000.webp 1000w, assets/hq/kerala-veranda-1774.webp 1774w" sizes="100vw" alt="Red hand-knotted rug on a Kerala veranda in golden evening light" style="object-position:55% 65%"></div>
   <h1 class="vh">Aruna Textile: handmade rugs and carpets</h1>
   <div class="hero-dots" id="hDots" role="group" aria-label="Choose slide"></div>
 </header>
@@ -1234,23 +1271,23 @@ body::after{content:'';position:fixed;inset:0;z-index:90;pointer-events:none;bac
     <h2 class="h-lg">Shop by Technique</h2>
   </div>
   <div class="cats">
-    <a class="cat rv" href="https://claude.ai/artifact/PumdhbL2gvogEjry8eSRF9#cat=Handtufted">
+    <a class="cat rv" href="https://radiant-khapse-0df5b6.netlify.app/#cat=Handtufted">
       <div class="cat-img"><img class="a" src="assets/hq/floral-blush-1000.webp" alt="Handtufted floral rug" loading="lazy"><img class="b" src="assets/hq/tufting-1000.webp" alt="" loading="lazy"></div>
       <h3>Handtufted</h3><span class="more">Explore &rarr;</span>
     </a>
-    <a class="cat rv" href="https://claude.ai/artifact/PumdhbL2gvogEjry8eSRF9#cat=Pitloom">
+    <a class="cat rv" href="https://radiant-khapse-0df5b6.netlify.app/#cat=Pitloom">
       <div class="cat-img"><img class="a" src="assets/hq/flatweave-rust-1000.webp" alt="Pitloom flatweave rug" loading="lazy"><img class="b" src="assets/hq/pitloom-1000.webp" alt="" loading="lazy"></div>
       <h3>Pitloom</h3><span class="more">Explore &rarr;</span>
     </a>
-    <a class="cat rv" href="https://claude.ai/artifact/PumdhbL2gvogEjry8eSRF9#cat=Braided">
+    <a class="cat rv" href="https://radiant-khapse-0df5b6.netlify.app/#cat=Braided">
       <div class="cat-img"><img class="a" src="assets/hq/jute-braid-1000.webp" alt="Braided jute rug" loading="lazy"><img class="b" src="assets/hq/braided-1000.webp" alt="" loading="lazy"></div>
       <h3>Braided</h3><span class="more">Explore &rarr;</span>
     </a>
-    <a class="cat rv" href="https://claude.ai/artifact/PumdhbL2gvogEjry8eSRF9#cat=Broadloom">
+    <a class="cat rv" href="https://radiant-khapse-0df5b6.netlify.app/#cat=Broadloom">
       <div class="cat-img"><img class="a" src="assets/hq/charcoal-weave-1000.webp" alt="Broadloom woven rug" loading="lazy"><img class="b" src="assets/hq/broadloom-1000.webp" alt="" loading="lazy"></div>
       <h3>Broadloom</h3><span class="more">Explore &rarr;</span>
     </a>
-    <a class="cat rv" href="https://claude.ai/artifact/PumdhbL2gvogEjry8eSRF9#cat=Jacquard">
+    <a class="cat rv" href="https://radiant-khapse-0df5b6.netlify.app/#cat=Jacquard">
       <div class="cat-img"><img class="a" src="assets/hq/jacquard-1000.webp" alt="Jacquard rug" loading="lazy"><img class="b" src="assets/hq/jacquard-close-1000.webp" alt="" loading="lazy"></div>
       <h3>Jacquard</h3><span class="more">Explore &rarr;</span>
     </a>
@@ -1277,7 +1314,7 @@ body::after{content:'';position:fixed;inset:0;z-index:90;pointer-events:none;bac
     <button class="s11 zoom rv-img" data-full="assets/hq/flatweave-rust-2000.webp"><img src="assets/hq/flatweave-rust-1000.webp" alt="Rust pitloom flatweave" loading="lazy"><span>Pitloom</span></button>
     <button class="s12 zoom rv-img" data-full="assets/hq/coral-fold-2000.webp"><img src="assets/hq/coral-fold-1000.webp" alt="Coral rug folded to show its finished backing" loading="lazy"><span>Finished Backing</span></button>
   </div>
-  <div class="center-cta rv"><a href="https://claude.ai/artifact/PumdhbL2gvogEjry8eSRF9" class="btn ghost-dark">Shop the Collection</a></div>
+  <div class="center-cta rv"><a href="https://radiant-khapse-0df5b6.netlify.app/" class="btn ghost-dark">Shop the Collection</a></div>
 </section>
 
 <!-- ============ ABOUT — split with photo pair ============ -->
@@ -1300,12 +1337,6 @@ body::after{content:'';position:fixed;inset:0;z-index:90;pointer-events:none;bac
     <figure class="feat rv"><div class="zoom"><img src="assets/hq/charkha-1000.webp" alt="Artisan spinning on a charkha" loading="lazy"></div><figcaption>Sustainable Practices</figcaption></figure>
     <figure class="feat rv"><div class="zoom"><img src="assets/hq/dispatch-1000.webp" alt="Rugs loaded for export" loading="lazy"></div><figcaption>Global Reach</figcaption></figure>
   </div>
-</section>
-
-<!-- ============ STATEMENT BANNER ============ -->
-<section class="sec banner">
-  <img src="assets/video/banner-pattern.jpg" alt="Hands guiding yarn over a patterned weave" loading="lazy">
-  <video class="loop" muted loop playsinline preload="none" poster="assets/video/banner-pattern.jpg" data-src="assets/video/banner-pattern.mp4" aria-hidden="true"></video>
 </section>
 
 <!-- ============ ABOUT US: OUR JOURNEY ============ -->
@@ -1488,13 +1519,14 @@ body::after{content:'';position:fixed;inset:0;z-index:90;pointer-events:none;bac
 </section>
 
 <!-- ============ CONTACT — centred prompt ============ -->
-<section class="sec wrap" id="contact">
-  <div class="contact2 rv">
+<section class="sec contact-hero" id="contact">
+  <img class="contact-bg" src="assets/hq/maroon-still-1774.webp" srcset="assets/hq/maroon-still-1000.webp 1000w, assets/hq/maroon-still-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" aria-hidden="true">
+  <div class="contact2 wrap rv">
     <span class="kicker">GET IN TOUCH</span>
     <h2 class="h-lg">Let&#8217;s Weave Something Together</h2>
     <p class="lead">Near Jain Jutta Factory, Tej Vihar Colony, Babail Road, India (HR) 132103</p>
     <div class="contact2-cta">
-      <a href="https://claude.ai/artifact/PumdhbL2gvogEjry8eSRF9" class="btn">Browse the Shop</a>
+      <a href="https://radiant-khapse-0df5b6.netlify.app/" class="btn">Browse the Shop</a>
       <a href="#" class="btn ghost-dark">WhatsApp Us</a>
       <a href="#" class="btn ghost-dark">Email Us</a>
     </div>
@@ -1513,7 +1545,7 @@ body::after{content:'';position:fixed;inset:0;z-index:90;pointer-events:none;bac
         <div class="socials"><a href="#" aria-label="WhatsApp"><svg class="si" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35m-5.42 7.4h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88a9.82 9.82 0 0 1 6.99 2.9 9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89a11.82 11.82 0 0 0-3.48-8.41Z"/></svg></a><a href="#" aria-label="Instagram"><svg class="si" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r=".6" fill="currentColor" stroke="none"/></svg></a><a href="#" aria-label="Facebook"><svg class="si" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M13.5 22v-8.2h2.8l.42-3.2H13.5V8.56c0-.93.26-1.56 1.6-1.56h1.7V4.14A22.7 22.7 0 0 0 14.32 4C11.86 4 10.2 5.5 10.2 8.24v2.36H7.4v3.2h2.8V22h3.3Z"/></svg></a><a href="#" aria-label="Email"><svg class="si" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></a></div>
       </div>
       <div><h5>EXPLORE</h5><a href="#products">Collections</a><a href="#about">About</a><a href="#journey">Our Journey</a><a href="#craft">Our Craft</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a></div>
-      <div><h5>SHOP</h5><a href="https://claude.ai/artifact/PumdhbL2gvogEjry8eSRF9">All Collections</a><a href="https://claude.ai/artifact/PumdhbL2gvogEjry8eSRF9#cat=Jacquard">Jacquard Carpets</a><a href="https://claude.ai/artifact/PumdhbL2gvogEjry8eSRF9#cat=Handtufted">Handtufted Articles</a></div>
+      <div><h5>SHOP</h5><a href="https://radiant-khapse-0df5b6.netlify.app/">All Collections</a><a href="https://radiant-khapse-0df5b6.netlify.app/#cat=Jacquard">Jacquard Carpets</a><a href="https://radiant-khapse-0df5b6.netlify.app/#cat=Handtufted">Handtufted Articles</a></div>
       <div><h5>VISIT</h5><a href="#contact">Near Jain Jutta Factory</a><a href="#contact">Tej Vihar Colony, Babail Road</a><a href="#contact">India (HR) 132103, India</a></div>
     </div>
     <div class="foot-bottom"><span>&copy; 2026 Aruna Textile. Design mockup for review.</span><span>Tradition &times; Innovation &times; Sustainability</span></div>
@@ -1946,15 +1978,47 @@ if(window.gsap && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
     }
   });
   track.addEventListener('click', e => { if(moved){ e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
-  // autoplay
+  // autoplay — a slow, continuous glide that loops seamlessly (pauses on hover, focus, touch or off-screen)
   if(reduce) return;
-  let hold = false, seen = false, timer = null;
-  const tick = () => { if(hold || !seen || document.hidden) return; track.scrollLeft > max() - 4 ? track.scrollTo({ left: 0, behavior: 'smooth' }) : go(1); };
-  timer = setInterval(tick, 3800);
+  const SPEED = 26;                                   // px per second — slow drift
+  slides.forEach((sl, n) => {                         // one set of clones so the loop never visibly rewinds
+    const c = sl.cloneNode(true);
+    c.setAttribute('aria-hidden', 'true'); c.tabIndex = -1; c.removeAttribute('data-full');
+    c.addEventListener('click', e => { if(!moved) slides[n].click(); });
+    track.appendChild(c);
+  });
+  const loopW = () => track.children[slides.length].offsetLeft - slides[0].offsetLeft;
+  track.classList.add('glide');
+  const syncLoop = () => {
+    const L = loopW(), vis = Math.min(1, track.clientWidth / L), p = L ? (track.scrollLeft % L) / L : 0;
+    bar.style.width = (vis * 100) + '%';
+    bar.style.transform = 'translateX(' + (p * (1 / vis - 1) * 100) + '%)';
+    prev.disabled = next.disabled = false;
+  };
+  track.removeEventListener('scroll', sync); track.addEventListener('scroll', syncLoop, { passive: true });
+  removeEventListener('resize', sync); addEventListener('resize', syncLoop); syncLoop();
+  let hold = false, pauseUntil = 0, pos = track.scrollLeft, last = 0;
+  const nudge = dir => {
+    const L = loopW();
+    if(dir < 0 && track.scrollLeft < step()){ track.scrollLeft += L; }
+    if(dir > 0 && track.scrollLeft > L){ track.scrollLeft -= L; }
+    pauseUntil = performance.now() + 2600; go(dir);
+  };
+  prev.onclick = () => nudge(-1); next.onclick = () => nudge(1);
+  function frame(t){
+    const dt = last ? Math.min(64, t - last) / 1000 : 0; last = t;
+    const r = track.getBoundingClientRect(), seen = r.bottom > 0 && r.top < innerHeight;
+    if(!hold && seen && !down && !document.hidden && t > pauseUntil){
+      pos += SPEED * dt;
+      const L = loopW(); if(L > 0 && pos >= L) pos -= L;
+      track.scrollLeft = pos;
+    } else pos = track.scrollLeft;
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
   ['pointerenter','focusin','touchstart'].forEach(ev => track.addEventListener(ev, () => { hold = true; }, { passive: true }));
   ['pointerleave','focusout'].forEach(ev => track.addEventListener(ev, () => { hold = false; }));
-  track.addEventListener('touchend', () => setTimeout(() => { hold = false; }, 4000), { passive: true });
-  new IntersectionObserver(es => es.forEach(e => { seen = e.isIntersecting; })).observe(track);
+  track.addEventListener('touchend', () => { pauseUntil = performance.now() + 3500; hold = false; }, { passive: true });
 })();
 </script>
 </body>
