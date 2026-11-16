@@ -1,0 +1,157 @@
+create table public.carts (
+  user_id uuid not null,
+  items jsonb not null default '[]'::jsonb,
+  updated_at timestamp with time zone not null default now(),
+  constraint carts_pkey primary key (user_id),
+  constraint carts_user_id_fkey foreign KEY (user_id) references auth.users (id) on delete CASCADE
+) TABLESPACE pg_default;
+
+create table public.orders (
+  id uuid not null default gen_random_uuid (),
+  order_no text not null,
+  status text not null default 'placed'::text,
+  customer jsonb not null,
+  address jsonb not null,
+  items jsonb not null,
+  subtotal integer not null,
+  shipping integer not null default 0,
+  total integer not null,
+  payment_method text null,
+  payment_status text not null default 'pending'::text,
+  courier text null,
+  tracking_no text null,
+  tracking_url text null,
+  note text null,
+  admin_note text null,
+  created_at timestamp with time zone not null default now(),
+  updated_at timestamp with time zone not null default now(),
+  razorpay_order_id text null,
+  razorpay_payment_id text null,
+  shiprocket_order_id text null,
+  shiprocket_shipment_id text null,
+  awb text null,
+  label_url text null,
+  shipping_quote jsonb null,
+  user_id uuid null,
+  refunded_amount integer not null default 0,
+  payment_attempts integer not null default 0,
+  last_payment_error text null,
+  paid_at timestamp with time zone null,
+  constraint orders_pkey primary key (id),
+  constraint orders_order_no_key unique (order_no),
+  constraint orders_user_id_fkey foreign KEY (user_id) references auth.users (id) on delete set null,
+  constraint orders_payment_status_check check (
+    (
+      payment_status = any (
+        array[
+          'pending'::text,
+          'paid'::text,
+          'cod'::text,
+          'partially_refunded'::text,
+          'refunded'::text,
+          'failed'::text
+        ]
+      )
+    )
+  ),
+  constraint orders_status_check check (
+    (
+      status = any (
+        array[
+          'awaiting_payment'::text,
+          'placed'::text,
+          'confirmed'::text,
+          'packed'::text,
+          'shipped'::text,
+          'out_for_delivery'::text,
+          'delivered'::text,
+          'cancelled'::text,
+          'returned'::text
+        ]
+      )
+    )
+  )
+) TABLESPACE pg_default;
+
+create index IF not exists orders_status_idx on public.orders using btree (status, created_at desc) TABLESPACE pg_default;
+
+create unique INDEX IF not exists orders_razorpay_order_idx on public.orders using btree (razorpay_order_id) TABLESPACE pg_default
+where
+  (razorpay_order_id is not null);
+
+create index IF not exists orders_awb_idx on public.orders using btree (awb) TABLESPACE pg_default
+where
+  (awb is not null);
+
+create index IF not exists orders_user_idx on public.orders using btree (user_id, created_at desc) TABLESPACE pg_default;
+
+
+
+create table public.payment_events (
+  id bigint generated always as identity not null,
+  event_id text null,
+  order_id uuid null,
+  type text not null,
+  payment_id text null,
+  amount_paise bigint null,
+  payload jsonb null,
+  created_at timestamp with time zone not null default now(),
+  constraint payment_events_pkey primary key (id),
+  constraint payment_events_event_id_key unique (event_id),
+  constraint payment_events_order_id_fkey foreign KEY (order_id) references orders (id) on delete set null
+) TABLESPACE pg_default;
+
+create index IF not exists payment_events_order_idx on public.payment_events using btree (order_id, created_at) TABLESPACE pg_default;
+
+create table public.products (
+  id text not null,
+  slug text not null,
+  status text not null default 'draft'::text,
+  data jsonb not null,
+  updated_at timestamp with time zone not null default now(),
+  constraint products_pkey primary key (id),
+  constraint products_slug_key unique (slug),
+  constraint products_status_check check (
+    (
+      status = any (array['draft'::text, 'published'::text])
+    )
+  )
+) TABLESPACE pg_default;
+
+
+create table public.refunds (
+  id uuid not null default gen_random_uuid (),
+  order_id uuid not null,
+  razorpay_refund_id text null,
+  amount integer not null,
+  status text not null default 'pending'::text,
+  reason text null,
+  created_by text null,
+  created_at timestamp with time zone not null default now(),
+  updated_at timestamp with time zone not null default now(),
+  constraint refunds_pkey primary key (id),
+  constraint refunds_razorpay_refund_id_key unique (razorpay_refund_id),
+  constraint refunds_order_id_fkey foreign KEY (order_id) references orders (id) on delete CASCADE,
+  constraint refunds_amount_check check ((amount > 0)),
+  constraint refunds_status_check check (
+    (
+      status = any (
+        array[
+          'pending'::text,
+          'processed'::text,
+          'failed'::text
+        ]
+      )
+    )
+  )
+) TABLESPACE pg_default;
+
+create index IF not exists refunds_order_idx on public.refunds using btree (order_id) TABLESPACE pg_default;
+
+
+create table public.integration_state (
+  key text not null,
+  value jsonb not null,
+  updated_at timestamp with time zone not null default now(),
+  constraint integration_state_pkey primary key (key)
+) TABLESPACE pg_default;

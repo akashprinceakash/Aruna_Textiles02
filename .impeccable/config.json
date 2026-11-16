@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-12T06:44:50.019Z",
+        "reason": "Claude: #lbImg is the lightbox <img>, src set by JS on open; intentional empty initial state"
+      }
+    ]
+  }
+}

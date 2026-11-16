@@ -1,0 +1,8 @@
+-> the complete site should in white + ivory theme 
+-> Add tab in the header called Our journey and link that to the our journey section 
+-> remove contents on the hero banner.. place the only CRAFTING EXCEPTIONAL HANDMADE RUGS & CARPETS in the rights with one button to explore the collection
+-> provide one customize button where user can customize their own by filling their requirements in the given form.
+-> the main requirement is less contents on throught the application more visuals refer https://obeetee.com/ and https://www.saraswatiglobal.com/
+-> TO do so add the more outcome photos
+-> remove the section which is below the hero section which is scrolling right side 
+-> to receive online payment need to integrate razorpay
